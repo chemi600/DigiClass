@@ -5,6 +5,7 @@ import { LoginDTO } from '../../models/loginDTO';
 import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RegistroDTO } from 'src/app/models/registroDTO';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,11 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  name:string='';
   email: string = '';
   password: string = '';
+  repeat_password:string='';
+  role:string='Alumno';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -61,4 +65,33 @@ export class LoginComponent {
     }
   }
 }
+
+  async register(){
+    if (!this.name || !this.email || !this.password || !this.repeat_password || !this.role) {
+      alert('Todos los campos son obligatorios.');
+      return;
+    }
+
+    if (this.password !== this.repeat_password) {
+      alert('Las contraseñas no coinciden.');
+      return;
+    }
+
+    const registroDto: RegistroDTO = {
+          name: this.name,
+          userName: this.name,
+          email: this.email,
+          password: this.password,
+          role: this.role
+        };
+
+        try {
+          if(await this.authService.register(registroDto)){
+            alert('Usuario registrado con éxito');
+            this.router.navigate(['/']);
+          }
+        } catch (error: any) {
+          alert(error.message);
+        }
+  }
 }

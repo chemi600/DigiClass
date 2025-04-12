@@ -16,10 +16,24 @@
 
     <form id="registroForm">
       <h2>Crear Cuenta</h2>
-      <input type="text" placeholder="Nombre completo" required />
-      <input type="email" placeholder="Correo electrónico" required />
-      <input type="password" placeholder="Contraseña" required />
-      <button type="submit">Registrarse</button>
+      <label class="title_radio">¿Que eres?</label>
+      <p>
+        <span class="radio">
+          <label for="alumno_role">Alumno</label>
+          <input type="radio" id="alumno_role" name="role" value="Alumno" [(ngModel)]="role"/>
+        </span>
+        <span class="radio">
+          <label for="profesor_role">Profesor</label>
+          <input type="radio" id="profesor_role" name="role" value="Profesor" [(ngModel)]="role"/>
+        </span>
+      </p>
+      <input type="text" placeholder="Nombre completo" [(ngModel)]="name" name="name" required />
+      <input type="email" placeholder="Correo electrónico" [(ngModel)]="email" name="email" required />
+      
+      
+      <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" required />
+      <input type="password" placeholder="Repita la Contraseña" [(ngModel)]="repeat_password" name="repeat_password" required />
+      <button type="submit" (click)="register()">Registrarse</button>
     </form>
   </div>
 </div>

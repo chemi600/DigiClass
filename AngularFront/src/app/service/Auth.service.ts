@@ -41,26 +41,22 @@ export class AuthService {
     });
   }  
 
-  register(registroDto: RegistroDTO): Observable<any> {
-    return new Observable<any>(observer => {
-      fetch(this.registerUrl, {
+  async register(registroDto: RegistroDTO): Promise<boolean> {
+      const response=await fetch(this.registerUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(registroDto)
       })
-      .then(async response => {
-        const data = await response.json();
-        console.log('Registro - Respuesta de la API:', data); 
-  
-        if (response.ok) {
-          observer.next(data);
-          observer.complete();
-        } else {
-          observer.error(new Error(data?.message || 'Erroren el registro, compruebe los campos'));
-        }
-      })
-      .catch(error => observer.error(error));
-    });
+
+      if (!response.ok) {
+        console.error('Login failed');
+        return false;
+      }else{
+        alert('Registro exitoso')
+        return true
+      }
+
+    
   }
   
   setToken(token: string): void {

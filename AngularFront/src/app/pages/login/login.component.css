@@ -95,3 +95,14 @@ button:hover {
   font-size: 0.9rem;
   color: var(--azul-oscuro);
 }
+
+.radio{
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+.radio>label{
+  margin-right: 3px;
+}
+.title_radio{
+  margin-bottom: 5px;
+}

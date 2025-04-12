@@ -40,13 +40,13 @@ export class RegisterComponent {
       role: 'alumno'
     };
 
-    try {
+    /*try {
       await firstValueFrom(this.authService.register(registroDto));
       alert('Usuario registrado con éxito');
       this.router.navigate(['/']);
     } catch (error: any) {
       alert(error.message);
-    }
+    }*/
   }
 
   goToLogin() {
