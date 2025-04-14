@@ -2,22 +2,32 @@ import {Component} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule],
+  imports: [RouterModule,CommonModule],
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Comercio';
+  title = 'DigiClass';
+  token=localStorage.getItem('token')
+  name=localStorage.getItem('name')
+  role=localStorage.getItem('role')
 
-  constructor(private router: Router) {}
+
+
+
+  
+  constructor(private router: Router) {
+    this.token=localStorage.getItem('token')
+  }
 
   goToRegister() {
-    console.log("hola")
+    
     this.router.navigate(['/login']);
   }
 }

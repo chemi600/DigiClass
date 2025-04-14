@@ -87,7 +87,10 @@ namespace RestAPI.Repository
 
             UserLoginResponseDto userLoginResponseDto = new UserLoginResponseDto
             {
-                Token = tokenHandler.WriteToken(jwtToken)
+                Token = tokenHandler.WriteToken(jwtToken),
+                Name=user.Name.ToString(),
+                Role=roles.FirstOrDefault()
+
             };
             return userLoginResponseDto;
         }

@@ -7,4 +7,6 @@ export interface UserDTO {
 
 export interface Result {
     token: string;
+    name:string;
+    role:string;
 }

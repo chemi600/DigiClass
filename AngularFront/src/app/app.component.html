@@ -11,9 +11,14 @@
     <a href="#">Sobre Nosotros</a>
     <a href="#">Contacto</a>
   </nav>
+  <ng-container *ngIf="!token; else inactivo">
   <div>
     <button (click)="goToRegister()" class="btn_login">Iniciar sesion</button>
   </div>
+</ng-container>
+<ng-template #inactivo>
+  <p>{{name}}</p>
+</ng-template>
   
 </header>
 

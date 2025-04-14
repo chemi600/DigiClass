@@ -8,10 +8,9 @@
 
     <form id="loginForm" class="active">
       <h2>Inicia Sesión</h2>
-      <input type="email" placeholder="Correo electrónico" required />
-      <input type="password" placeholder="Contraseña" required />
-      <button type="submit">Entrar</button>
-      <div class="link">¿Olvidaste tu contraseña?</div>
+      <input type="email" placeholder="Correo electrónico" name="loginDto.email" [(ngModel)]="loginDto.email" required />
+      <input type="password" placeholder="Contraseña" name="loginDto.password" [(ngModel)]="loginDto.password" required />
+      <button type="submit" (click)="login()">Entrar</button>
     </form>
 
     <form id="registroForm">
@@ -19,12 +18,12 @@
       <label class="title_radio">¿Que eres?</label>
       <p>
         <span class="radio">
-          <label for="alumno_role">Alumno</label>
-          <input type="radio" id="alumno_role" name="role" value="Alumno" [(ngModel)]="role"/>
+          <label for="alumno_role">Estudiante</label>
+          <input type="radio" id="alumno_role" name="role" value="estudiante" [(ngModel)]="role"/>
         </span>
         <span class="radio">
           <label for="profesor_role">Profesor</label>
-          <input type="radio" id="profesor_role" name="role" value="Profesor" [(ngModel)]="role"/>
+          <input type="radio" id="profesor_role" name="role" value="profesor" [(ngModel)]="role"/>
         </span>
       </p>
       <input type="text" placeholder="Nombre completo" [(ngModel)]="name" name="name" required />

@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RegistroDTO } from 'src/app/models/registroDTO';
+import { Result } from 'src/app/models/userDTO';
 
 @Component({
   selector: 'app-login',
@@ -19,24 +20,26 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   repeat_password:string='';
-  role:string='Alumno';
+  role:string='estudiante';
+
+   loginDto: LoginDTO = {
+    email: this.email, 
+    password: this.password,
+    
+  };
 
   constructor(private authService: AuthService, private router: Router) {}
 
   async login() {
-    const loginDto: LoginDTO = {
-      email: this.email, 
-      password: this.password,
-      token: ''
-    };
+    
     try {
-      const response = await firstValueFrom(this.authService.login(loginDto));
-      if (response?.result?.token) {
-        localStorage.setItem('token', response.result.token);
-        this.router.navigate(['/principal']);
-      } else {
-        alert('Error: Usuario o contraseña incorrectos.');
-      }      
+      const response:Result=await this.authService.login(this.loginDto);
+      if (response.token) {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('name',response.name);
+        localStorage.setItem('role',response.role)
+        this.router.navigate(['/']);
+      }   
     } catch (error: any) {
       alert(error.message);
     }
