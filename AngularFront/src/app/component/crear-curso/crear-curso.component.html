@@ -1,0 +1,23 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <h2>Nuevo Curso</h2>
+    <form>
+      <label>Título</label>
+      <input type="text" name="curso.titulo" [(ngModel)]="curso.titulo" required>
+
+      <label>Descripción</label>
+      <textarea name="curso.descripcion" [(ngModel)]="curso.descripcion" required></textarea>
+
+      <label>Fecha de inicio</label>
+      <input type="date" name="curso.fechaInicio" [(ngModel)]="curso.fechaInicio" required>
+
+      <label>Fecha final</label>
+      <input type="date" name="curso.fechaFin" [(ngModel)]="curso.fechaFin" required>
+
+      <div class="modal-actions">
+        <button type="button" (click)="onClose()">Cancelar</button>
+        <button (click)="onSubmit()" type="submit">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>

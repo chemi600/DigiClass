@@ -14,7 +14,6 @@ export class AuthService {
   private token: string | null = null;
 
   constructor() {
-    // Recuperar el token desde localStorage al inicializar el servicio
     this.token = localStorage.getItem('authToken');
   }
 

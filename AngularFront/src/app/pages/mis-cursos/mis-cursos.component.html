@@ -1,0 +1,83 @@
+
+
+<article>
+    <h1>Artículos por Categoría</h1>
+    <button (click)="openModal()" class="fixed-action-button">+</button>
+    <app-crear-curso *ngIf="showModal" (close)="closeModal()"></app-crear-curso>
+<section>
+    <h2>Tecnología</h2>
+    <div class="card-list">
+      
+        <div class="card">
+            <a href="#">
+          <div class="card-title">Cómo funciona la inteligencia artificial</div>
+          <div class="card-desc">Descubre los conceptos básicos y aplicaciones reales de la IA.</div>
+        </a>
+        <div class="card-footer">
+            <button class="card-button">Añadir</button>
+        </div>
+        </div>
+      
+      <a href="#">
+        <div class="card">
+          <div class="card-title">Avances en robótica 2025</div>
+          <div class="card-desc">Explora los últimos desarrollos en robótica moderna.</div>
+        </div>
+      </a>
+      <a href="#">
+        <div class="card">
+          <div class="card-title">Comparativa de smartphones</div>
+          <div class="card-desc">Un análisis completo de los mejores modelos de este año.</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Salud y Bienestar</h2>
+    <div class="card-list">
+      <a href="#">
+        <div class="card">
+          <div class="card-title">10 hábitos saludables</div>
+          <div class="card-desc">Consejos prácticos para mejorar tu estilo de vida.</div>
+        </div>
+      </a>
+      <a href="#">
+        <div class="card">
+          <div class="card-title">Manejo del estrés</div>
+          <div class="card-desc">Técnicas efectivas para controlar la ansiedad y el estrés.</div>
+        </div>
+      </a>
+      <a href="#">
+        <div class="card">
+          <div class="card-title">Vitaminas esenciales</div>
+          <div class="card-desc">Alimentos que fortalecen tu sistema inmunológico.</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Viajes</h2>
+    <div class="card-list">
+      <a href="#">
+        <div class="card">
+          <div class="card-title">Destinos 2025</div>
+          <div class="card-desc">Una lista de los lugares más populares para visitar este año.</div>
+        </div>
+      </a>
+      <a href="#">
+        <div class="card">
+          <div class="card-title">Viajar con poco presupuesto</div>
+          <div class="card-desc">Tips para recorrer el mundo sin gastar demasiado.</div>
+        </div>
+      </a>
+      <a href="#">
+        <div class="card">
+          <div class="card-title">Europa para mochileros</div>
+          <div class="card-desc">Una guía completa para tu aventura europea.</div>
+        </div>
+      </a>
+    </div>
+  </section>
+</article>

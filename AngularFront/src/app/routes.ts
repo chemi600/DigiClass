@@ -5,6 +5,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { PrincipalComponent } from './pages/principal/prinicpal.component';
 import { PropuestaPageComponent } from './pages/propuesta-page/propuesta-page.component';
 import { AnadirComponent } from './pages/anadir/anadir.component';
+import { MisCursosComponent } from './pages/mis-cursos/mis-cursos.component';
 
 const routeConfig: Routes = [
   {
@@ -26,6 +27,11 @@ const routeConfig: Routes = [
     path: 'propuestaPage/:id',
     component: PropuestaPageComponent,
     title: 'I.E.S. Comercio'
+  },
+  {
+    path: 'misCursos',
+    component: MisCursosComponent,
+    title: 'Mis Cursos'
   },
   {
     path: 'anadir',

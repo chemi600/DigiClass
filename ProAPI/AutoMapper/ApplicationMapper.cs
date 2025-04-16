@@ -2,6 +2,7 @@
 using AutoMapper;
 using RestAPI.Models.DTOs;
 using RestAPI.Models.DTOs;
+using RestAPI.Models.DTOs.CursoDTO;
 using RestAPI.Models.DTOs.UserDto;
 
 
@@ -16,7 +17,9 @@ namespace RestAPI.AutoMapper
         public ApplicationMapper()
         {
             CreateMap<AppUser, UserDto>().ReverseMap();
-           
+            CreateMap<CursoEntity, CursoDTO>().ReverseMap();
+            CreateMap<CreateCurso, CursoEntity>().ReverseMap();
+
 
         }
     }

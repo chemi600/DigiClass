@@ -15,11 +15,17 @@ namespace RestAPI.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            
+            modelBuilder.Entity<AppUser>()
+            .HasMany(e => e.CursosProfesor)
+            .WithOne(e => e.Profesor)
+            .HasForeignKey(e => e.IdProfesor)
+            .IsRequired();
+
         }
         //Add models here
         public DbSet<AppUser> AppUsers { get; set; }
-       
+        public DbSet<CursoEntity> Cursos { get; set; }
+
 
     }
 }
