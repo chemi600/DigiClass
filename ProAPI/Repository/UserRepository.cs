@@ -47,6 +47,15 @@ namespace RestAPI.Repository
             return !_context.AppUsers.Any(user => user.UserName == userName);
         }
 
+        public bool Apuntarse(int CursoId,string EstudianteId)
+        {
+            var user= _context.AppUsers.FirstOrDefault(u => u.Id == EstudianteId);
+            var curso=_context.Cursos.FirstOrDefault(u => u.Id==CursoId);
+            user.Cursos.Add(curso);
+            curso.Participantes.Add(user);
+            return true;
+        }
+
         public async Task<UserLoginResponseDto> Login(UserLoginDto userLoginDto)
         {
             var user = _context.AppUsers.FirstOrDefault(u => u.Email.ToLower() == userLoginDto.Email.ToLower());

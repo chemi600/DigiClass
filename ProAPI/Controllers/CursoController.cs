@@ -14,13 +14,13 @@ namespace RestAPI.Controllers
         
         [Route("api/[controller]")]
         [ApiController]
-    public  class ProyectoController : ControllerBase
+    public  class CursoController : ControllerBase
         {
             private readonly ICursoRepository _cursoRepository;
             private readonly IMapper _mapper;
             //protected readonly ILogger _logger;
 
-        public ProyectoController(ICursoRepository repository, IMapper mapper /*ILogger logger*/)
+        public CursoController(ICursoRepository repository, IMapper mapper /*ILogger logger*/)
             {
                 _cursoRepository = repository;
                 _mapper = mapper;

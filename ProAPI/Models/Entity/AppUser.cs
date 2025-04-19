@@ -8,7 +8,7 @@ namespace RestAPI.Models.Entity
         public string Email { get; set; }
 
         public List<CursoEntity> CursosProfesor { get; set; }
-
+        public List<CursoEntity> Cursos { get; set; }
 
 
     }

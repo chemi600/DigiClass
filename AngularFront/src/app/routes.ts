@@ -6,6 +6,7 @@ import { PrincipalComponent } from './pages/principal/prinicpal.component';
 import { PropuestaPageComponent } from './pages/propuesta-page/propuesta-page.component';
 import { AnadirComponent } from './pages/anadir/anadir.component';
 import { MisCursosComponent } from './pages/mis-cursos/mis-cursos.component';
+import { CursosComponent } from './pages/cursos/cursos.component';
 
 const routeConfig: Routes = [
   {
@@ -37,6 +38,11 @@ const routeConfig: Routes = [
     path: 'anadir',
     component: AnadirComponent,
     title: 'I.E.S. Comercio'
+  },
+  {
+    path: 'cursos',
+    component: CursosComponent,
+    title: 'DigiClass'
   },
   {
     path: '**',

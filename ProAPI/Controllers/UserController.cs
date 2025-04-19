@@ -6,6 +6,7 @@ using RestAPI.Models.DTOs;
 using RestAPI.Models.DTOs.UserDto;
 using RestAPI.Repository.IRepository;
 using System.Net;
+using System.Security.Claims;
 
 namespace RestAPI.Controllers
 {
@@ -38,6 +39,17 @@ namespace RestAPI.Controllers
             }
 
             return Ok(userListDto);
+        }
+
+        [Authorize(Roles = "alumno")]
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public IActionResult Apuntarse_Curso(int id)
+        {
+            _userRepository.Apuntarse(id, User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            return Ok(true);
         }
 
         //[Authorize(Roles = "admin")]

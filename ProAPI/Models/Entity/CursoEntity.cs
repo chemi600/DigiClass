@@ -27,6 +27,8 @@ namespace RestAPI.Models.Entity
 
         public AppUser Profesor { get; set; }
 
+        public List<AppUser> Participantes { get; set; }
+
 
 
 

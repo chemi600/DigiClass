@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CreateCurso } from '../models/create-curso';
+import { Curso, Result } from '../models/curso';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CursoService {
   readonly baseUrl = 'http://localhost:5072/api';
-  private pathCurso = `${this.baseUrl}/`;
+  private pathCurso = `${this.baseUrl}/Curso`;
 
   private token: string | null = null;
 
@@ -30,5 +31,22 @@ export class CursoService {
       return true
     }
       
-    }  
+    }
+
+    async Cursos(): Promise<[Curso]> {
+      const response=await fetch(this.pathCurso, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }).then((data)=>data.json())
+      .catch(error => {
+        throw new Error(error)
+      });
+  
+      
+        return response;
+      
+        
+      }
+    
+    
 }

@@ -7,8 +7,8 @@
   </div>
   <nav>
     <a href="#">Inicio</a>
-    <a href="#">Cursos</a>
-  <ng-container *ngIf="!token">
+    <a  routerLink="/cursos">Cursos</a>
+  <ng-container *ngIf="token">
     <a href="#" routerLink="/misCursos">Mis Cursos</a>
 </ng-container>
     <a href="#">Sobre Nosotros</a>

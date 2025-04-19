@@ -1,6 +1,7 @@
 ﻿using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using RestAPI.Models.Entity;
 
 namespace RestAPI.Data
@@ -20,6 +21,10 @@ namespace RestAPI.Data
             .WithOne(e => e.Profesor)
             .HasForeignKey(e => e.IdProfesor)
             .IsRequired();
+
+            modelBuilder.Entity<AppUser>()
+           .HasMany(e => e.Cursos)
+           .WithMany(e => e.Participantes);
 
         }
         //Add models here
