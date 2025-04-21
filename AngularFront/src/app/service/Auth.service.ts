@@ -14,7 +14,7 @@ export class AuthService {
   private token: string | null = null;
 
   constructor() {
-    this.token = localStorage.getItem('authToken');
+    this.token = localStorage.getItem('token');
   }
 
   async login(credentials: LoginDTO): Promise<Result> {

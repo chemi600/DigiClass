@@ -7,6 +7,7 @@ import { PropuestaPageComponent } from './pages/propuesta-page/propuesta-page.co
 import { AnadirComponent } from './pages/anadir/anadir.component';
 import { MisCursosComponent } from './pages/mis-cursos/mis-cursos.component';
 import { CursosComponent } from './pages/cursos/cursos.component';
+import { DetallesComponent } from './pages/detalles/detalles.component';
 
 const routeConfig: Routes = [
   {
@@ -43,6 +44,11 @@ const routeConfig: Routes = [
     path: 'cursos',
     component: CursosComponent,
     title: 'DigiClass'
+  },
+  {
+    path: 'detalles/:id',
+    component: DetallesComponent,
+    title: 'DigiClass',
   },
   {
     path: '**',

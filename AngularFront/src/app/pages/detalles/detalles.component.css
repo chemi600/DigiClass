@@ -1,0 +1,33 @@
+article {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f9f9f9;
+}
+.curso-container {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: auto;
+}
+.campo {
+    margin-bottom: 20px;
+}
+.campo label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+.boton-inscribirse {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.boton-inscribirse:hover {
+    background-color: #218838;
+}

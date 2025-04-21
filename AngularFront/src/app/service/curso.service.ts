@@ -12,7 +12,7 @@ export class CursoService {
   private token: string | null = null;
 
   constructor() { 
-    this.token = localStorage.getItem('authToken');
+    this.token = localStorage.getItem('token');
 
   }
 
@@ -41,12 +41,19 @@ export class CursoService {
       .catch(error => {
         throw new Error(error)
       });
-  
-      
         return response;
-      
-        
       }
+
+      async Curso(id:number): Promise<Curso> {
+        const response=await fetch(this.pathCurso+`/${id}`, {
+          method: 'GET',
+          headers: { 'Authorization': `Bearer ${this.token}`},
+        }).then((data)=>data.json())
+        .catch(error => {
+          throw new Error(error)
+        });
+          return response;
+        }
     
     
 }

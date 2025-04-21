@@ -47,9 +47,9 @@ namespace RestAPI.Controllers
         }
 
 
-        
 
-        [Authorize(Roles = "profesor,alumno")]
+
+        [AllowAnonymous]
         [HttpGet("{id:int}", Name = "[controller]_GeCursoEntity")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

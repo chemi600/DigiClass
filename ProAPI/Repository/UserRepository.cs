@@ -52,7 +52,7 @@ namespace RestAPI.Repository
             var user= _context.AppUsers.FirstOrDefault(u => u.Id == EstudianteId);
             var curso=_context.Cursos.FirstOrDefault(u => u.Id==CursoId);
             user.Cursos.Add(curso);
-            curso.Participantes.Add(user);
+            //curso.Participantes.Add(user);
             return true;
         }
 
