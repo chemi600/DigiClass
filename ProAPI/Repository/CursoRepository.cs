@@ -38,7 +38,7 @@ namespace RestAPI.Repository
             if (_cache.TryGetValue(CursoEntityCacheKey, out ICollection<CursoEntity> CursosCached))
                 return CursosCached;
 
-            var CursosFromDb = await _context.Cursos.OrderBy(c => c.FechaInicio).ToListAsync();
+            var CursosFromDb = await _context.Cursos.Include(p=>p.Profesor).OrderBy(c => c.FechaInicio).ToListAsync();
             var cacheEntryOptions = new MemoryCacheEntryOptions()
                   .SetAbsoluteExpiration(TimeSpan.FromSeconds(CacheExpirationTime));
 
@@ -55,13 +55,15 @@ namespace RestAPI.Repository
                     return CursoEntity;
             }
 
-            return await _context.Cursos.FirstOrDefaultAsync(c => c.Id == id);
+            return await _context.Cursos.Include(curso=>curso.Profesor).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<bool> ExistsAsync(int id)
         {
             return await _context.Cursos.AnyAsync(c => c.Id == id);
         }
+
+        
 
         public async Task<bool> CreateAsync(CursoEntity CursoEntity)
         {

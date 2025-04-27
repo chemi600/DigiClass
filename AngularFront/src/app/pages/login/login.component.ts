@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RegistroDTO } from 'src/app/models/registroDTO';
 import { Result } from 'src/app/models/userDTO';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent {
     
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private app:AppComponent) {}
 
   async login() {
     
@@ -37,7 +38,11 @@ export class LoginComponent {
       if (response.token) {
         localStorage.setItem('token', response.token);
         localStorage.setItem('name',response.name);
-        localStorage.setItem('role',response.role)
+        localStorage.setItem('role',response.role);
+
+        this.app.setToken()
+        this.app.setName()
+        this.app.setRole()
         this.router.navigate(['/']);
       }   
     } catch (error: any) {

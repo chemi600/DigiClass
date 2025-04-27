@@ -28,7 +28,7 @@ namespace RestAPI.Controllers
             }
 
         [HttpGet]
-        //[Authorize(Roles = "profesor,alumno")]
+        //[Authorize(Roles = "profesor,estudiante")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll()
@@ -59,8 +59,9 @@ namespace RestAPI.Controllers
             {
                 var entity = await _cursoRepository.GetAsync(id);
                 if (entity == null) return NotFound();
-
-                return Ok(_mapper.Map<CursoDTO>(entity));
+                var mappedEntity = _mapper.Map<CursoDTO>(entity);
+                mappedEntity.NombreProfesor = entity.Profesor.Name;
+                return Ok(mappedEntity);
             }
             catch (Exception ex)
             {
@@ -93,7 +94,8 @@ namespace RestAPI.Controllers
             }
         }
 
-        [Authorize(Roles = "profesor,alumno")]
+
+        [Authorize(Roles = "profesor,estudiante")]
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -119,7 +121,7 @@ namespace RestAPI.Controllers
         }
 
 
-        [Authorize(Roles = "profesor,alumno")]
+        [Authorize(Roles = "profesor,estudiante")]
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -49,11 +49,18 @@ namespace RestAPI.Repository
 
         public bool Apuntarse(int CursoId,string EstudianteId)
         {
-            var user= _context.AppUsers.FirstOrDefault(u => u.Id == EstudianteId);
-            var curso=_context.Cursos.FirstOrDefault(u => u.Id==CursoId);
+            var user= _context.AppUsers.Include(u=>u.Cursos).FirstOrDefault(u => u.Id == EstudianteId);
+            var curso=_context.Cursos.Include(p=>p.Profesor).FirstOrDefault(u => u.Id==CursoId);
             user.Cursos.Add(curso);
+            _context.SaveChanges();
             //curso.Participantes.Add(user);
             return true;
+        }
+
+        public async Task<bool> ExistsAsync(int Cursoid,string UserId)
+        {
+            var user= _context.AppUsers.FirstOrDefault(c => c.Id == UserId);
+            return user.Cursos.Exists(c=>c.Id == Cursoid);
         }
 
         public async Task<UserLoginResponseDto> Login(UserLoginDto userLoginDto)

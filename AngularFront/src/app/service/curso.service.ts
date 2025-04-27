@@ -8,6 +8,8 @@ import { Curso, Result } from '../models/curso';
 export class CursoService {
   readonly baseUrl = 'http://localhost:5072/api';
   private pathCurso = `${this.baseUrl}/Curso`;
+  private inscribirse=`http://localhost:5072/api/users/Apuntarse`
+
 
   private token: string | null = null;
 
@@ -54,6 +56,22 @@ export class CursoService {
         });
           return response;
         }
+
+        async InscribirseCurso(Id: number): Promise<boolean> {
+          const response=await fetch(this.inscribirse+`/${Id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${this.token}` }
+          }).catch(error => {
+            throw new Error(error)
+          });
+      
+          if (!response.ok) {
+            throw new Error('Algo salio mal')
+          }else{
+            return true
+          }
+            
+          }
     
     
 }

@@ -24,7 +24,7 @@ namespace RestAPI.Controllers
             _mapper = mapper;
         }
 
-        [Authorize(Roles = "alumno,profesor")]
+        [Authorize(Roles = "estudiante,profesor")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -41,11 +41,11 @@ namespace RestAPI.Controllers
             return Ok(userListDto);
         }
 
-        [Authorize(Roles = "alumno")]
-        [HttpGet("{id:int}")]
+        [Authorize(Roles = "estudiante")]
+        [HttpPost("Apuntarse/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public IActionResult Apuntarse_Curso(int id)
+        public IActionResult Apuntarse(int id)
         {
             _userRepository.Apuntarse(id, User.FindFirstValue(ClaimTypes.NameIdentifier));
 

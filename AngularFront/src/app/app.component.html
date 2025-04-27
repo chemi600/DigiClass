@@ -20,7 +20,12 @@
   </div>
 </ng-container>
 <ng-template #inactivo>
-  <p>{{name}}</p>
+  <div class="contenedor" id="miContenedor">
+    <div class="texto" (click)="toggleDesplegable()">{{name}}</div>
+    <div class="desplegable" *ngIf="mostrarDesplegable">
+      <button class="logout" (click)="logout()">Cerrar Sesion</button>
+    </div>
+  </div>
 </ng-template>
   
 </header>

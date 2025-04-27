@@ -61,6 +61,52 @@
     font-family: 'Be Vietnam Pro', sans-serif;
   }
 
+/*desplegable*/
+.contenedor {
+  position: relative;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+}
+
+.texto {
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.desplegable {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  min-width: 100px;
+  overflow: hidden;
+  z-index: 1;
+}
+.desplegable>.logout{
+  background-color: red;
+  color: white;
+}
+
+.desplegable button {
+  width: 100%;
+  padding: 10px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.desplegable button:hover {
+  color:#38bdf8;
+}
+
   
 
 

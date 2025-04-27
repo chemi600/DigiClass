@@ -12,19 +12,23 @@
 
     <div class="campo">
         <label for="profesor">Nombre del Profesor:</label>
-        <div id="profesor"></div>
+        <div id="profesor">{{Curso.nombreProfesor}}</div>
     </div>
 
     <div class="campo">
         <label for="fecha-inicio">Fecha de Inicio:</label>
-        <div id="fecha-inicio">01/05/2025</div>
+        <div id="fecha-inicio">{{fechaInicio}}</div>
     </div>
 
     <div class="campo">
         <label for="fecha-fin">Fecha de Finalización:</label>
-        <div id="fecha-fin">30/06/2025</div>
+        <div id="fecha-fin">{{fechaFin}}</div>
     </div>
 
-    <button class="boton-inscribirse">Inscribirse</button>
+    <ng-container *ngIf="token">
+        <div>
+            <button class="boton-inscribirse" (click)="Inscribirse()">Inscribirse</button>
+        </div>
+      </ng-container>
 </div>
 </article>

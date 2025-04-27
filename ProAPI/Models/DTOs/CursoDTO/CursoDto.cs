@@ -9,7 +9,7 @@ namespace RestAPI.Models.DTOs.CursoDTO
         public string IdProfesor { get; set; }
         public DateTime CreatedDate { get; set; }
         
-
+        public string NombreProfesor { get; set; }
 
 
     }

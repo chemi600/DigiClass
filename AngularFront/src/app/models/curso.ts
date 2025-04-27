@@ -10,5 +10,6 @@ export interface Curso {
     titulo:string,
     descripcion:string,
     fechaInicio:Date,
-    fechaFin:Date
+    fechaFin:Date,
+    nombreProfesor:string
 }
