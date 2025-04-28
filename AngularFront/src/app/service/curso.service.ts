@@ -8,6 +8,8 @@ import { Curso, Result } from '../models/curso';
 export class CursoService {
   readonly baseUrl = 'http://localhost:5072/api';
   private pathCurso = `${this.baseUrl}/Curso`;
+  private pathCursoLogin = `${this.baseUrl}/Curso/Nuevos`;
+
   private inscribirse=`http://localhost:5072/api/users/Apuntarse`
 
 
@@ -45,6 +47,17 @@ export class CursoService {
       });
         return response;
       }
+
+      async CursosLogin(): Promise<[Curso]> {
+        const response=await fetch(this.pathCursoLogin, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.token}` },
+        }).then((data)=>data.json())
+        .catch(error => {
+          throw new Error(error)
+        });
+          return response;
+        }
 
       async Curso(id:number): Promise<Curso> {
         const response=await fetch(this.pathCurso+`/${id}`, {

@@ -46,6 +46,16 @@ namespace RestAPI.Repository
             return CursosFromDb;
         }
 
+        public async Task<ICollection<CursoEntity>> GetAllUnsubscribeAsync(string userId)
+        {
+            
+
+            var CursosFromDb = await _context.Cursos.Include(p => p.Profesor).Where(curso=>!curso.Participantes.
+            Any(participante=>participante.Id.Equals(userId))).OrderBy(c => c.FechaInicio).ToListAsync();
+
+            return CursosFromDb;
+        }
+
         public async Task<CursoEntity> GetAsync(int id)
         {
             if (_cache.TryGetValue(CursoEntityCacheKey, out ICollection<CursoEntity> CursosCached))

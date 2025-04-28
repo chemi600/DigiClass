@@ -47,6 +47,25 @@ namespace RestAPI.Controllers
         }
 
 
+        [HttpGet("Nuevos")]
+        [Authorize(Roles = "profesor,estudiante")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllUnsubscribe()
+        {
+            try
+            {
+                string userId=User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var entities = _mapper.Map<List<CursoDTO>>(await _cursoRepository.GetAllUnsubscribeAsync(userId));
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError(ex, "Error fetching data");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+
 
 
         [AllowAnonymous]

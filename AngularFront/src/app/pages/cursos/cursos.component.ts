@@ -13,9 +13,15 @@ import { CursoService } from 'src/app/service/curso.service';
 export class CursosComponent {
 cursosList:Curso[]=[];
     constructor(private cursoService: CursoService) {
+      if(localStorage.getItem('token')){
+        cursoService.CursosLogin().then((cursos)=>{
+          this.cursosList=cursos
+        })
+      }else{
       cursoService.Cursos().then((cursos)=>{
         this.cursosList=cursos
       })
+     }
     }
   
     
