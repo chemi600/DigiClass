@@ -42,6 +42,25 @@ namespace RestAPI.Repository
             return _context.AppUsers.OrderBy(user => user.UserName).ToList();
         }
 
+        public async Task<ICollection<CursoEntity>> GetAllMyCourseAsync(string userId)
+        {
+
+            var user = _context.AppUsers.FirstOrDefault(u => u.Id == userId);
+            var roles = await _userManager.GetRolesAsync(user);
+            AppUser UsersFromDb;
+            if (roles.Any(u => u=="profesor")) {
+                UsersFromDb = _context.AppUsers.Include(p => p.CursosProfesor).FirstOrDefault(u => u.Id == userId);
+                return UsersFromDb.CursosProfesor;
+
+            }
+            else
+            {
+                UsersFromDb = _context.AppUsers.Include(p => p.Cursos).FirstOrDefault(u => u.Id == userId);
+                return UsersFromDb.Cursos;
+            }
+
+        }
+
         public bool IsUniqueUser(string userName)
         {
             return !_context.AppUsers.Any(user => user.UserName == userName);

@@ -56,6 +56,8 @@ namespace RestAPI.Repository
             return CursosFromDb;
         }
 
+        
+
         public async Task<CursoEntity> GetAsync(int id)
         {
             if (_cache.TryGetValue(CursoEntityCacheKey, out ICollection<CursoEntity> CursosCached))

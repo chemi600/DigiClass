@@ -3,7 +3,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestAPI.Models.DTOs;
+using RestAPI.Models.DTOs.CursoDTO;
 using RestAPI.Models.DTOs.UserDto;
+using RestAPI.Repository;
 using RestAPI.Repository.IRepository;
 using System.Net;
 using System.Security.Claims;
@@ -39,6 +41,24 @@ namespace RestAPI.Controllers
             }
 
             return Ok(userListDto);
+        }
+
+        [HttpGet("MisCursos")]
+        [Authorize(Roles = "profesor,estudiante")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllMyCourse()
+        {
+            try
+            {
+                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var entities = _mapper.Map<List<CursoDTO>>(await _userRepository.GetAllMyCourseAsync(userId));
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError(ex, "Error fetching data");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         [Authorize(Roles = "estudiante")]
