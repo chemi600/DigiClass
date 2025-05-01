@@ -7,7 +7,7 @@
       <app-crear-curso *ngIf="showModal" (close)="closeModal()"></app-crear-curso>
   </ng-container>
 <section>
-    <h2>Tecnología</h2>
+    <h2>Tus cursos</h2>
     <div class="card-list">
       <app-card-curso *ngFor="let CursoModel of cursosActuales" [CursoModel]="CursoModel"></app-card-curso>
     </div>
@@ -17,24 +17,6 @@
   <section>
     <h2>Terminados</h2>
     <div class="card-list">
-      <a href="#">
-        <div class="card">
-          <div class="card-title">Destinos 2025</div>
-          <div class="card-desc">Una lista de los lugares más populares para visitar este año.</div>
-        </div>
-      </a>
-      <a href="#">
-        <div class="card">
-          <div class="card-title">Viajar con poco presupuesto</div>
-          <div class="card-desc">Tips para recorrer el mundo sin gastar demasiado.</div>
-        </div>
-      </a>
-      <a href="#">
-        <div class="card">
-          <div class="card-title">Europa para mochileros</div>
-          <div class="card-desc">Una guía completa para tu aventura europea.</div>
-        </div>
-      </a>
     </div>
   </section>
 </article>

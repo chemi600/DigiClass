@@ -61,6 +61,24 @@ namespace RestAPI.Controllers
             }
         }
 
+        [HttpGet("Participantes/{id:int}")]
+        [Authorize(Roles = "profesor,estudiante")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllEstudents(int id)
+        {
+            try
+            {
+                
+                var entities = _mapper.Map<List<UserDto>>(await _userRepository.GetAllEstudents(id));
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError(ex, "Error fetching data");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [Authorize(Roles = "estudiante")]
         [HttpPost("Apuntarse/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

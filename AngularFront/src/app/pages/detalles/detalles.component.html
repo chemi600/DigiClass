@@ -1,4 +1,11 @@
 <article>
+    <div class="tab">
+        <button [class.active]="activeTab === 'tab1'" (click)="setTab('tab1')">Informacion</button>
+        <button [class.active]="activeTab === 'tab2'" *ngIf="role=='profesor'" (click)="setTab('tab2')">Participantes</button>
+    </div>
+
+<div *ngIf="activeTab === 'tab1'" class="tabcontent">
+
 <div class="curso-container">
     <div class="campo">
         <label for="titulo">Título:</label>
@@ -25,10 +32,16 @@
         <div id="fecha-fin">{{fechaFin}}</div>
     </div>
 
-    <ng-container *ngIf="token">
+    <ng-container *ngIf="role=='estudiante'">
         <div>
             <button class="boton-inscribirse" (click)="Inscribirse()">Inscribirse</button>
         </div>
       </ng-container>
+</div>
+</div>
+
+<div *ngIf="activeTab === 'tab2'" class="tabcontent">
+    <h3>Contenido de Tab 2</h3>
+    <p>Este es el contenido de la segunda pestaña.</p>
 </div>
 </article>

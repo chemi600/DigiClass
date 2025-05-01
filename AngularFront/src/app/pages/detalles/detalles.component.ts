@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Curso } from 'src/app/models/curso';
 import { CursoService } from 'src/app/service/curso.service';
 import dayjs from 'dayjs';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -17,18 +18,29 @@ export class DetallesComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   fechaInicio:string=''
   fechaFin:string=''
-  token=localStorage.getItem('token')
+  role=localStorage.getItem('role')
+  activeTab: string = 'tab1';
+  participantes:User[]=[]
 
   constructor(private cursoService: CursoService) {
-    this.token=localStorage.getItem('token');
+    this.role=localStorage.getItem('role');
     const cursoId = parseInt(this.route.snapshot.params['id']);
         cursoService.Curso(cursoId).then((cursos)=>{
           this.Curso=cursos
           this.fechaInicio=dayjs(this.Curso.fechaInicio).format('DD/MM/YYYY')
           this.fechaFin=dayjs(this.Curso.fechaFin).format('DD/MM/YYYY')
         })
+        if(this.role=='profesor')
+          this.cursoService.Participantes(cursoId).then((estudiantes)=>{
+            this.participantes=estudiantes
+            //falta componente participante
+        })
       }
       Inscribirse(){
           this.cursoService.InscribirseCurso(this.Curso.id)
       }
+      setTab(tab: string) {
+        this.activeTab = tab;
+      }
+      
 }

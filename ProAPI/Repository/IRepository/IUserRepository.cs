@@ -10,6 +10,7 @@ namespace RestAPI.Repository.IRepository
         bool IsUniqueUser(string userName);
         bool Apuntarse(int cursoId, string userId);
         Task<ICollection<CursoEntity>> GetAllMyCourseAsync(string userId);
+        Task<ICollection<AppUser>> GetAllEstudents(int cursoId);
         Task<UserLoginResponseDto> Login(UserLoginDto userLoginDto);
         Task<UserLoginResponseDto> Register(UserRegistrationDto userRegistrationDto);
     }

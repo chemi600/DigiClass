@@ -61,6 +61,14 @@ namespace RestAPI.Repository
 
         }
 
+        public async Task<ICollection<AppUser>> GetAllEstudents(int cursoId)
+        {
+  
+                var UsersFromDb = _context.Cursos.Include(p => p.Participantes).FirstOrDefault(u => u.Id == cursoId);
+                return UsersFromDb.Participantes;
+
+        }
+
         public bool IsUniqueUser(string userName)
         {
             return !_context.AppUsers.Any(user => user.UserName == userName);
