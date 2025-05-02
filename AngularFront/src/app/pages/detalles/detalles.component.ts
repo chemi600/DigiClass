@@ -5,6 +5,8 @@ import { Curso } from 'src/app/models/curso';
 import { CursoService } from 'src/app/service/curso.service';
 import dayjs from 'dayjs';
 import { User } from 'src/app/models/user';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDeleteComponent } from 'src/app/component/confirm-delete/confirm-delete.component';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class DetallesComponent {
   activeTab: string = 'tab1';
   participantes:User[]=[]
 
-  constructor(private cursoService: CursoService) {
+  constructor(private cursoService: CursoService,private dialog: MatDialog) {
     this.role=localStorage.getItem('role');
     const cursoId = parseInt(this.route.snapshot.params['id']);
         cursoService.Curso(cursoId).then((cursos)=>{
@@ -33,7 +35,6 @@ export class DetallesComponent {
         if(this.role=='profesor')
           this.cursoService.Participantes(cursoId).then((estudiantes)=>{
             this.participantes=estudiantes
-            //falta componente participante
         })
       }
       Inscribirse(){
@@ -42,5 +43,22 @@ export class DetallesComponent {
       setTab(tab: string) {
         this.activeTab = tab;
       }
-      
+
+      deleteUser(username: string,userId:string) {
+        const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+          width: '300px',
+          data: { username, userId }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.cursoService.DeleteEstudent(this.Curso.id,userId).then((value)=>{
+              if(value)
+                this.participantes = this.participantes.filter(user => user.id !== userId);
+            })
+
+          }
+        });
+
+      }
 }

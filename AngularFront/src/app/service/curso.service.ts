@@ -10,8 +10,11 @@ export class CursoService {
   readonly baseUrl = 'http://localhost:5072/api';
   private pathCurso = `${this.baseUrl}/Curso`;
   private pathCursoLogin = `${this.baseUrl}/Curso/Nuevos`;
+
   private misCursos=`http://localhost:5072/api/users/MisCursos`
   private participantes=`http://localhost:5072/api/users/Participantes`
+  private Cursoparticipantes=`http://localhost:5072/api/Curso/Participantes`
+
 
   private inscribirse=`http://localhost:5072/api/users/Apuntarse`
 
@@ -107,6 +110,25 @@ export class CursoService {
           }
             
           }
+
+          async DeleteEstudent(cursoId: number,userId:string): Promise<boolean> {
+            this.token = localStorage.getItem('token');
+    
+              const response=await fetch(this.Cursoparticipantes+`/${cursoId}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${this.token}` },
+                body: JSON.stringify(userId)
+              }).catch(error => {
+                throw new Error(error)
+              });
+          
+              if (!response.ok) {
+                throw new Error('Algo salio mal')
+              }else{
+                return true
+              }
+                
+              }
 
           async Participantes(id:number): Promise<[User]> {
             this.token = localStorage.getItem('token');

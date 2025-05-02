@@ -41,7 +41,24 @@
 </div>
 
 <div *ngIf="activeTab === 'tab2'" class="tabcontent">
-    <h3>Contenido de Tab 2</h3>
-    <p>Este es el contenido de la segunda pestaña.</p>
+    
+    <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of participantes">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+              <button (click)="deleteUser(user.name,user.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 </div>
 </article>

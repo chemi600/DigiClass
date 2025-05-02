@@ -100,5 +100,17 @@ namespace RestAPI.Repository
             _context.Cursos.Remove(CursoEntity);
             return await Save();
         }
+
+        public async Task<bool> DeleteParticipanteAsync(int cursoid,string userId)
+        {
+            var curso= await _context.Cursos.Include(curso => curso.Participantes).FirstOrDefaultAsync(c => c.Id == cursoid);
+            var user= await _context.AppUsers.FirstOrDefaultAsync(c => c.Id == userId);
+            if (curso == null)
+                return false;
+
+            curso.Participantes.Remove(user);
+            
+            return await Save();
+        }
     }
 }

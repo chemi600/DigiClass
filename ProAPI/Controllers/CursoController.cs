@@ -162,5 +162,27 @@ namespace RestAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [Authorize(Roles = "profesor")]
+        [HttpDelete("Participantes/{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteParticipante(int id, [FromBody] string userId)
+        {
+            try
+            {
+                
+                var entity = await _cursoRepository.GetAsync(id);
+                if (entity == null) return NotFound();
+
+                await _cursoRepository.DeleteParticipanteAsync(id,userId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError(ex, "Error deleting data");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }
