@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using RestAPI.Migrations;
 using RestAPI.Models.Entity;
 
 namespace RestAPI.Data
@@ -16,18 +17,31 @@ namespace RestAPI.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<AppUser>()
-            .HasMany(e => e.CursosProfesor)
-            .WithOne(e => e.Profesor)
-            .HasForeignKey(e => e.IdProfesor)
-            .IsRequired();
+            modelBuilder.Entity<CursoEntity>()
+             .HasOne(c => c.Profesor)
+             .WithMany(u => u.CursosProfesor)
+             .HasForeignKey(c => c.IdProfesor)
+             .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<AppUser>()
-           .HasMany(e => e.Cursos)
-           .WithMany(e => e.Participantes);
-
+            modelBuilder.Entity<CursoEntity>()
+           .HasMany(c => c.Participantes)
+           .WithMany(u => u.Cursos)
+           .UsingEntity<Dictionary<string, object>>(
+               "CursoEstudiantes",
+               j => j
+                   .HasOne<AppUser>()
+                   .WithMany()
+                   .HasForeignKey("EstudianteId")
+                   .HasPrincipalKey("Id")
+                   .OnDelete(DeleteBehavior.Cascade),
+               j => j
+                   .HasOne<CursoEntity>()
+                   .WithMany()
+                   .HasForeignKey("CursoId")
+                   .HasPrincipalKey("Id")
+                   .OnDelete(DeleteBehavior.Cascade));
         }
-        //Add models here
+        
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<CursoEntity> Cursos { get; set; }
 

@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
+namespace Wpf.Ui.Demo.Mvvm.DTO
+{
+    public class LoginDTO
+    {
+        public string email { get; set; }
+        public string password { get; set; }
+        [JsonPropertyName("token")]
+        public string token { get; set; }
+    }
+}

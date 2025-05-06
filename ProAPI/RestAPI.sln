@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestAPI", "RestAPI.csproj", "{11C337D0-9ED1-41CD-B679-7DAEF820735A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoManager", "..\LoginRegister\InfoManager.csproj", "{B195EAE4-941E-4EC1-B2CD-D7B26B2C7A88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{11C337D0-9ED1-41CD-B679-7DAEF820735A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11C337D0-9ED1-41CD-B679-7DAEF820735A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11C337D0-9ED1-41CD-B679-7DAEF820735A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B195EAE4-941E-4EC1-B2CD-D7B26B2C7A88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B195EAE4-941E-4EC1-B2CD-D7B26B2C7A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B195EAE4-941E-4EC1-B2CD-D7B26B2C7A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B195EAE4-941E-4EC1-B2CD-D7B26B2C7A88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="InfoManager.View.Dashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:InfoManager.View"
+        Background="White"
+             xmlns:viewmodels="clr-namespace:InfoManager.ViewModel"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewmodels:DashboardViewModel}"
+        Height="400" Width="750">
+
+   
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ui:Button Content="Log Out" Grid.Row="2" Width="80" HorizontalAlignment="Left" Command="{Binding LogoutCommand}"/>
+        <ui:Button Content="Cursos" Grid.Row="0" Grid.Column="0" Width="80" HorizontalAlignment="Center" Command="{Binding SelectViewModelCommand}" CommandParameter="{Binding ProductsList}"/>
+        <ui:Button Content="Usuarios" Grid.Row="0" Grid.Column="1" Width="80" HorizontalAlignment="Center" Command="{Binding SelectViewModelCommand}" CommandParameter="{Binding UserListView}"/>
+
+
+        <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding SelectedViewModel}"/>
+
+    </Grid>
+</UserControl>

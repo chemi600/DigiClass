@@ -1,0 +1,49 @@
+﻿<Window x:Class="InfoManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:InfoManager.ViewModel" 
+        xmlns:view="clr-namespace:InfoManager.View" 
+        mc:Ignorable="d"
+        Title="InfoManager" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type=viewModel:MainViewModel}">
+
+    <Window.Resources>
+
+
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <view:Home/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:RegisterViewModel}">
+            <view:Register/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ProductListViewModel}">
+            <view:ProductListView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ProductViewModel}">
+            <view:ProductView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
+            <view:Dashboard/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:UserListViewModel}">
+            <view:UserListView/>
+        </DataTemplate>
+
+    </Window.Resources>
+
+    <Grid>
+        
+
+        <ContentControl Content="{Binding SelectedViewModel}"/>
+
+    </Grid>
+</Window>
+
+

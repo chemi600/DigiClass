@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestAPI.Data;
 
@@ -11,9 +12,11 @@ using RestAPI.Data;
 namespace RestAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250505181604_DeleteRestrict")]
+    partial class DeleteRestrict
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,19 +25,19 @@ namespace RestAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CursoEstudiantes", b =>
+            modelBuilder.Entity("AppUserCursoEntity", b =>
                 {
-                    b.Property<int>("CursoId")
+                    b.Property<int>("CursosId")
                         .HasColumnType("int");
 
-                    b.Property<string>("EstudianteId")
+                    b.Property<string>("ParticipantesId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CursoId", "EstudianteId");
+                    b.HasKey("CursosId", "ParticipantesId");
 
-                    b.HasIndex("EstudianteId");
+                    b.HasIndex("ParticipantesId");
 
-                    b.ToTable("CursoEstudiantes");
+                    b.ToTable("AppUserCursoEntity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -277,17 +280,17 @@ namespace RestAPI.Migrations
                     b.ToTable("Cursos");
                 });
 
-            modelBuilder.Entity("CursoEstudiantes", b =>
+            modelBuilder.Entity("AppUserCursoEntity", b =>
                 {
                     b.HasOne("RestAPI.Models.Entity.CursoEntity", null)
                         .WithMany()
-                        .HasForeignKey("CursoId")
+                        .HasForeignKey("CursosId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("RestAPI.Models.Entity.AppUser", null)
                         .WithMany()
-                        .HasForeignKey("EstudianteId")
+                        .HasForeignKey("ParticipantesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
