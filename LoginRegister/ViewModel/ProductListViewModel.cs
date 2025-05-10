@@ -20,20 +20,33 @@ namespace InfoManager.ViewModel
         [ObservableProperty]
         private ObservableCollection<CursoDTO> _items;
         [ObservableProperty]
-        private string _filtro;
+        private string _filtro="";
 
         private readonly IProductProvider<CursoDTO> _productService;
 
-        private readonly ProductViewModel _productView;
+        private ProductViewModel _selectedViewModel;
         private readonly IStringUtils _stringUtils;
         private List<CursoDTO> _products;
+
+        [ObservableProperty]
+        private string _mostrar="Hidden";
+        [ObservableProperty]
+        private string _mostrarButtonCerrar = "Hidden";
+
+        [ObservableProperty]
+        private string _mostrarButtonRecarga = "Visible";
 
 
         public ProductListViewModel(IProductProvider<CursoDTO> productService, ProductViewModel productView, IStringUtils stringUtils)
         {
             _productService = productService;
-            _productView = productView;
+            _selectedViewModel = productView;
             _stringUtils = stringUtils;
+        }
+        public ProductViewModel SelectedViewModel
+        {
+            get => _selectedViewModel;
+            set => SetProperty(ref _selectedViewModel, value);
         }
 
         public override async Task LoadAsync()
@@ -48,14 +61,14 @@ namespace InfoManager.ViewModel
             }
         }
 
-        [RelayCommand]
+        /*[RelayCommand]
         private async Task SelectViewModel(object? parameter)
         {
             MainViewModel mainWindow = App.Current.Services.GetService<MainViewModel>();
             _productView.SetId(_stringUtils.ConvertToInteger(parameter?.ToString() ?? string.Empty) ?? int.MinValue);
             mainWindow.SelectViewModelCommand.Execute(_productView);
 
-        }
+        }*/
 
         [RelayCommand]
         private void Filter()
@@ -85,6 +98,27 @@ namespace InfoManager.ViewModel
                     Items.Remove(curso);
 
             }
+        }
+
+        [RelayCommand]
+        private async void MostrarPanel(CursoDTO curso)
+        {
+
+            _selectedViewModel.SetId(curso.id);
+            await _selectedViewModel.LoadAsync();
+            Mostrar = "Visible";
+            MostrarButtonCerrar = "Visible";
+            MostrarButtonRecarga = "Hidden";
+        }
+
+        [RelayCommand]
+        public void Cerrar()
+        {
+            
+            Mostrar = "Hidden";
+            MostrarButtonCerrar = "Hidden";
+            MostrarButtonRecarga = "Visible";
+
         }
 
     }

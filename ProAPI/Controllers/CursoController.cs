@@ -164,10 +164,10 @@ namespace RestAPI.Controllers
         }
 
         [Authorize(Roles = "profesor")]
-        [HttpDelete("Participantes/{id:int}")]
+        [HttpDelete("Participantes/{id:int}&&{userId:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteParticipante(int id, [FromBody] string userId)
+        public async Task<IActionResult> DeleteParticipante(int id, string userId)
         {
             try
             {

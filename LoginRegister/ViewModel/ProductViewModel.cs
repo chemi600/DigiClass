@@ -17,31 +17,49 @@ namespace InfoManager.ViewModel
     {
         
 
-        private readonly IProductProvider<Product> _productService;
+        private readonly IProductProvider<UsersModel> _productService;
 
-        private int _productId;
+        private int _cursoId;
 
         [ObservableProperty]
-        private string _name;
+        private ObservableCollection<UsersModel> _items;
+        
 
-        public ProductViewModel(IProductProvider<Product> productService)
+        public ProductViewModel(IProductProvider<UsersModel> productService)
         {
             _productService = productService;
            
         }
         public void SetId(int id)
         {
-            _productId = id;
+            _cursoId = id;
         }
 
         public override async Task LoadAsync()
         {
             MainViewModel mainWindow = App.Current.Services.GetService<MainViewModel>();
 
-            Product planetas = await _productService.Get(_productId,mainWindow.GetToken());
-            Name=planetas.Name;
-           
+            List<UsersModel> users = await _productService.GetAllParticipantes(_cursoId,mainWindow.GetToken());
+
+            Items = new ObservableCollection<UsersModel>();
+            foreach (var user in users)
+            {
+                Items.Add(user);
+            }
+
         }
+        [RelayCommand]
+        public async void Quitar(UsersModel user)
+        {
+            MainViewModel mainWindow = App.Current.Services.GetService<MainViewModel>();
+
+           if(await _productService.DeleteParticipante(user.id, mainWindow.GetToken(), _cursoId))
+            {
+                Items.Remove(user);
+            }
+        }
+
+        
 
        
     }

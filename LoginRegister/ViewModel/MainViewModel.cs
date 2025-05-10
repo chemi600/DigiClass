@@ -59,6 +59,12 @@ public partial class MainViewModel : ViewModelBase
     {
         return _token;
     }
+
+    public void CerrarVista()
+    {
+        if (SelectedViewModel is ProductListViewModel vista)
+            vista.Cerrar();
+    }
 }
  
 

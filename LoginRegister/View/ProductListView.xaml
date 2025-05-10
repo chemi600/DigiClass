@@ -9,7 +9,7 @@
              xmlns:viewmodels="clr-namespace:InfoManager.ViewModel"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:ProductListViewModel}"
-        Height="450" Width="800">
+        Height="auto" Width="auto">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -17,15 +17,20 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="70"/>
+        </Grid.ColumnDefinitions>
 
-        <Label Content="Filtro" HorizontalAlignment="Center" Grid.Row="0"/>
-        <ui:TextBox PlaceholderText="Filtro" Width="300" Height="25" Grid.Row="1" Text="{Binding Filtro,Mode=TwoWay}"/>
-        <ui:Button Content="Buscar" Grid.Row="1" Width="40" Margin="376,0,0,0" Command="{Binding FilterCommand}"/>
-        <ui:Button Grid.Row="1" Width="60" HorizontalAlignment="Right" Content="Recargar"/>
-        <ScrollViewer Grid.Row="2">
+        <Label Content="Filtro" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+        <ui:TextBox PlaceholderText="Filtro" Width="200" Height="25" Grid.Row="1" Grid.Column="1" Text="{Binding Filtro,Mode=TwoWay}"/>
+        <ui:Button Content="Buscar" Grid.Row="1" Grid.Column="2" Width="40" Command="{Binding FilterCommand}"/>
+        <ui:Button Grid.Row="1" Width="60" Grid.Column="0" HorizontalAlignment="Right" Content="Recargar" Visibility="{Binding MostrarButtonRecarga}"/>
+        <ui:Button Grid.Row="1" Width="60" Grid.Column="0" HorizontalAlignment="Right" Content="Cerrar" Command="{Binding CerrarCommand}" Visibility="{Binding MostrarButtonCerrar}"/>
+        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="3"  >
             <DataGrid 
-    Grid.Row="1"
-     Grid.ColumnSpan="2"       
+
     x:Name="MyDataGrid"       
     ItemsSource="{Binding Items,Mode=TwoWay}" 
     AutoGenerateColumns="False" 
@@ -44,9 +49,18 @@
                     <DataGridTextColumn Header="Id" Binding="{Binding id}" />
                     <DataGridTextColumn Header="Titulo" Binding="{Binding titulo}" />
                     <DataGridTextColumn Header="Descripcion" Binding="{Binding descripcion}"/>
-                    <DataGridTextColumn Header="Prodesor" Binding="{Binding nombreProfesor}"/>
+                    <DataGridTextColumn Header="Profesor" Binding="{Binding nombreProfesor}"/>
                     <DataGridTextColumn Header="Fecha de Inicio" Binding="{Binding fechaInicio}"/>
                     <DataGridTextColumn Header="Fecha de fin" Binding="{Binding fechaFin}"/>
+                    
+                    <DataGridTemplateColumn Header="Ver">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Ver" Command="{Binding DataContext.MostrarPanelCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
 
                     <DataGridTemplateColumn Header="Acciones">
                         <DataGridTemplateColumn.CellTemplate>
@@ -54,10 +68,16 @@
                                 <Button Content="Eliminar" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
+
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
+
+        <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="#EEE"  Panel.ZIndex="10"
+            Visibility="{Binding Mostrar}">
+            <ContentControl Content="{Binding SelectedViewModel}"/>
+        </Border>
 
     </Grid>
 </UserControl>

@@ -19,18 +19,7 @@
             <Label Content="Contraseña"/>
             
             <ui:PasswordBox Height="25" Password="{Binding Password,Mode=TwoWay}"/>
-            
-            <ui:TextBlock
-                Foreground="#4A90E2" 
-                Cursor="Hand" 
-                VerticalAlignment="Center">
-                
-                <Hyperlink Command="{Binding RegisterCommand}">
-                    <Run Text="Regístrate aquí" />
-                </Hyperlink>
-                
-            </ui:TextBlock>
-            
+
             <ui:Button Content="Enviar" Margin="20" Command="{Binding LoginCommand}"/>
         </StackPanel>
 

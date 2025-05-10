@@ -18,6 +18,7 @@ namespace InfoManager.Helpers
         public const string PRODUCT_PATH = BASE_URL + "Product";
         public const string CURSOS = BASE_URL+"Curso";
         public const string USERS = BASE_URL + "users";
+        public const string PARTICIPANTES = USERS + "/Participantes";
 
 
 

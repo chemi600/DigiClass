@@ -114,10 +114,9 @@ export class CursoService {
           async DeleteEstudent(cursoId: number,userId:string): Promise<boolean> {
             this.token = localStorage.getItem('token');
     
-              const response=await fetch(this.Cursoparticipantes+`/${cursoId}`, {
+              const response=await fetch(this.Cursoparticipantes+`/${cursoId}&&${userId}`, {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${this.token}` },
-                body: JSON.stringify(userId)
+                headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${this.token}` }
               }).catch(error => {
                 throw new Error(error)
               });

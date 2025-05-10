@@ -35,8 +35,10 @@
         <DataTemplate DataType="{x:Type viewModel:UserListViewModel}">
             <view:UserListView/>
         </DataTemplate>
+        
 
     </Window.Resources>
+    
 
     <Grid>
         

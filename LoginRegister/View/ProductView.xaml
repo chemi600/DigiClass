@@ -9,9 +9,45 @@
              xmlns:viewmodels="clr-namespace:InfoManager.ViewModel"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:ProductViewModel}"
-        Height="450" Width="800">
+        Height="350" Width="500">
     <Grid>
-        <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+
+        <DataGrid 
+    Grid.Row="1"
+    x:Name="MyDataGrid"       
+    ItemsSource="{Binding Items,Mode=TwoWay}" 
+    AutoGenerateColumns="False" 
+    Margin="10" 
+    CanUserResizeColumns="True"
+    CanUserResizeRows="False"
+    CanUserAddRows="False"
+    VerticalAlignment="Top"
+    HorizontalAlignment="Center"
+    MinRowHeight="25"
+    MaxHeight="400" 
+    ColumnWidth="Auto"
+    ScrollViewer.VerticalScrollBarVisibility="Auto"
+    ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding id}" />
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding name}" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding email}"/>
+                    
+                <DataGridTemplateColumn Header="Acciones">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Quitar" Command="{Binding DataContext.QuitarCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            </DataGrid>
+        
     </Grid>
 </UserControl>

@@ -13,21 +13,66 @@
 
    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ui:Button Content="Log Out" Grid.Row="2" Width="80" HorizontalAlignment="Left" Command="{Binding LogoutCommand}"/>
-        <ui:Button Content="Cursos" Grid.Row="0" Grid.Column="0" Width="80" HorizontalAlignment="Center" Command="{Binding SelectViewModelCommand}" CommandParameter="{Binding ProductsList}"/>
-        <ui:Button Content="Usuarios" Grid.Row="0" Grid.Column="1" Width="80" HorizontalAlignment="Center" Command="{Binding SelectViewModelCommand}" CommandParameter="{Binding UserListView}"/>
 
+        <!-- Menú lateral -->
+        <StackPanel Background="#2C3E50" Grid.Column="0">
+            <TextBlock Text="Menú" Foreground="White" FontSize="16" Margin="10"/>
+            <ListBox x:Name="NavigationMenu" Background="Transparent" BorderThickness="0"
+                     Foreground="White" FontSize="14">
 
-        <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding SelectedViewModel}"/>
+                <ListBoxItem>
+                    <Button Content="Cursos" 
+                    Command="{Binding SelectViewModelCommand}"
+                    CommandParameter="{Binding ProductsList}"
+                    Background="Transparent" 
+                    Foreground="White" 
+                    BorderThickness="0" 
+                    Padding="10,5"
+                    Width="138"/>   
+                </ListBoxItem>
+                <ListBoxItem >
+                    <Button Content="Usuarios" 
+                Command="{Binding SelectViewModelCommand}"
+                            CommandParameter="{Binding UserListView}"
+                Background="Transparent" 
+                Foreground="White" 
+                BorderThickness="0" 
+                Padding="10,5"
+                Width="138"/>
+                </ListBoxItem>
+            </ListBox>
+        </StackPanel>
+        
 
+        <!-- Encabezado y contenido -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Encabezado -->
+            <DockPanel Background="#34495E" Grid.Row="0" LastChildFill="False">
+                <TextBlock Text="Dashboard" FontSize="18" Foreground="White"
+                           VerticalAlignment="Center" Margin="10,0" DockPanel.Dock="Left" />
+
+                <Button Content="Cerrar sesión"
+                        Margin="10"
+                        Padding="10,5"
+                        Background="#E74C3C"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Right"
+                        DockPanel.Dock="Right"
+                         />
+            </DockPanel>
+
+            <!-- Contenido principal -->
+            <ContentControl Grid.Row="1" x:Name="MainContent" Content="{Binding SelectedViewModel}" />
+        </Grid>
     </Grid>
 </UserControl>
