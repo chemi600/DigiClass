@@ -13,5 +13,7 @@ namespace RestAPI.Repository.IRepository
         Task<ICollection<AppUser>> GetAllEstudents(int cursoId);
         Task<UserLoginResponseDto> Login(UserLoginDto userLoginDto);
         Task<UserLoginResponseDto> Register(UserRegistrationDto userRegistrationDto);
+        Task<bool> DeleteAsync(string id);
+
     }
 }

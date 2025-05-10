@@ -34,7 +34,7 @@ namespace InfoManager.Service
             using HttpClient httpClient = new HttpClient();
             {
                 httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-                HttpResponseMessage datos = await httpClient.GetAsync(Constants.CURSOS);
+                HttpResponseMessage datos = await httpClient.GetAsync(Constants.USERS);
                 string dataget = await datos.Content.ReadAsStringAsync();
                 return JsonSerializer.Deserialize<List<T>>(dataget);
             }
@@ -91,7 +91,7 @@ namespace InfoManager.Service
             using HttpClient httpClient = new HttpClient();
             {
                 httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-                HttpResponseMessage datos = await httpClient.DeleteAsync(Constants.CURSOS + "/" + userId);
+                HttpResponseMessage datos = await httpClient.DeleteAsync(Constants.USERS + "/" + userId);
                 string dataget = await datos.Content.ReadAsStringAsync();
                 //return JsonSerializer.Deserialize<T>(dataget);
                 if (datos.IsSuccessStatusCode)

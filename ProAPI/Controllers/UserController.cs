@@ -104,6 +104,26 @@ namespace RestAPI.Controllers
         //    return Ok(_mapper.Map<CategoryDto>(user));
         //}
 
+        [Authorize(Roles = "profesor,admin")]
+        [HttpDelete("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(string id)
+        {
+            try
+            {
+                var entity =  _userRepository.GetUser(id);
+                if (entity == null) return NotFound();
+
+                await _userRepository.DeleteAsync(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [AllowAnonymous]
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status201Created)]

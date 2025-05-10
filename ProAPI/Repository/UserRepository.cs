@@ -32,9 +32,25 @@ namespace RestAPI.Repository
             _mapper = mapper;
         }
 
+        public async Task<bool> Save()
+        {
+            var result = await _context.SaveChangesAsync() >= 0;
+            return result;
+        }
+
         public AppUser GetUser(string id)
         {
             return _context.AppUsers.FirstOrDefault(user => user.Id == id);
+        }
+
+        public async Task<bool> DeleteAsync(string id)
+        {
+            var CursoEntity =  GetUser(id);
+            if (CursoEntity == null)
+                return false;
+
+            _context.AppUsers.Remove(CursoEntity);
+            return await Save();
         }
 
         public ICollection<AppUser> GetUsers()
