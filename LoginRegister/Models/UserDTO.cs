@@ -24,6 +24,8 @@ namespace InfoManager.Models
         {
             [JsonPropertyName("token")]
             public string Token { get; set; }
+            
+            public string role { get; set; }
         }
 }
 

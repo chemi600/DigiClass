@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InfoManager.ViewModel
 {
@@ -17,7 +18,7 @@ namespace InfoManager.ViewModel
         private readonly ILoginProvider<UserDTO> _loginService;
 
         [ObservableProperty]
-        private string _name="rafa@gmail.com";
+        private string _name="ra@gmail.com";
 
         [ObservableProperty]
         private string _password="Abc123??";
@@ -35,12 +36,26 @@ namespace InfoManager.ViewModel
                 Email = Name,
                 Password = Password,
             };
-            UserDTO user=await _loginService.PostLogin(loginDTO);
-            MainViewModel mainWindow = App.Current.Services.GetService<MainViewModel>();
-            mainWindow.SetToken(user.Result.Token);
+            try
+            {
+                UserDTO user = await _loginService.PostLogin(loginDTO);
 
-
-            mainWindow.SelectViewModelCommand.Execute(App.Current.Services.GetService<DashboardViewModel>());
+                if (!user.IsSuccess || user.Result.role != "admin")
+                {
+                    MessageBox.Show("Usuario o contraseñas incorrectos");
+                } else
+                {
+                    MainViewModel mainWindow = App.Current.Services.GetService<MainViewModel>();
+                    mainWindow.SetToken(user.Result.Token);
+                    mainWindow.SelectViewModelCommand.Execute(App.Current.Services.GetService<DashboardViewModel>());
+                }
+                
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Usuario o contraseñas incorrectos");
+            }
+            
 
 
         }

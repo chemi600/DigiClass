@@ -5,7 +5,7 @@ namespace RestAPI.Repository.IRepository
 {
     public interface IUserRepository
     {
-        ICollection<AppUser> GetUsers();
+        Task<ICollection<AppUser>> GetUsers();
         AppUser GetUser(string id);
         bool IsUniqueUser(string userName);
         bool Apuntarse(int cursoId, string userId);

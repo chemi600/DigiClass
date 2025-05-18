@@ -29,7 +29,7 @@ export class AuthService {
       });
 
       
-        console.log('Login response:', responseFetch);
+        //poconsole.log('Login response:', responseFetch);
         if (responseFetch?.result?.token) {
           const response:Result={
             token: responseFetch.result.token,

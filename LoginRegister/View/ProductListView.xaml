@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:InfoManager.View"
-        Background="White"
+        Background="#DDA853"
              xmlns:viewmodels="clr-namespace:InfoManager.ViewModel"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:ProductListViewModel}"
@@ -16,6 +16,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70"/>
@@ -74,10 +75,15 @@
             </DataGrid>
         </ScrollViewer>
 
-        <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="#EEE"  Panel.ZIndex="10"
+        <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="4" Background="#EEE"  Panel.ZIndex="10"
             Visibility="{Binding Mostrar}">
             <ContentControl Content="{Binding SelectedViewModel}"/>
         </Border>
 
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Grid.Row="3" Grid.Column="1">
+            <Button Content="Previous" Command="{Binding PreviousCommand}"/>
+            <TextBlock Text="{Binding CurrentPage}" VerticalAlignment="Center" Margin="5"/>
+            <Button Content="Next" Command="{Binding NextCommand}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

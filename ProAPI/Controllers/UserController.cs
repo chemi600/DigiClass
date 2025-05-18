@@ -1,10 +1,13 @@
 ﻿
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RestAPI.Migrations;
 using RestAPI.Models.DTOs;
 using RestAPI.Models.DTOs.CursoDTO;
 using RestAPI.Models.DTOs.UserDto;
+using RestAPI.Models.Entity;
 using RestAPI.Repository;
 using RestAPI.Repository.IRepository;
 using System.Net;
@@ -19,25 +22,29 @@ namespace RestAPI.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         protected ResponseApi _reponseApi;
-        public UserController(IUserRepository userRepository, IMapper mapper)
+        private readonly UserManager<AppUser> _userManager;
+
+        public UserController(IUserRepository userRepository, IMapper mapper, UserManager<AppUser> userManager)
         {
             _userRepository = userRepository;
             _reponseApi = new ResponseApi();
             _mapper = mapper;
+            _userManager = userManager;
         }
 
-        [Authorize(Roles = "estudiante,profesor")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public IActionResult GetUsers()
+        public async Task<IActionResult> GetUsers()
         {
-            var userList = _userRepository.GetUsers();
-            var userListDto = new List<UserDto>();
+            var userList = await _userRepository.GetUsers();
+            var userListDto = _mapper.Map<List<UserDto>>(userList);
 
-            foreach (var user in userList)
+            for (int i = 0; i < userListDto.Count; i++)
             {
-                userListDto.Add(_mapper.Map<UserDto>(user));
+                var role =  await _userManager.GetRolesAsync(userList.ElementAt(i));
+                userListDto[i].Rol = role.FirstOrDefault();
             }
 
             return Ok(userListDto);
@@ -62,7 +69,7 @@ namespace RestAPI.Controllers
         }
 
         [HttpGet("Participantes/{id:int}")]
-        [Authorize(Roles = "profesor,estudiante")]
+        [Authorize(Roles = "profesor,admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllEstudents(int id)
         {
@@ -104,7 +111,7 @@ namespace RestAPI.Controllers
         //    return Ok(_mapper.Map<CategoryDto>(user));
         //}
 
-        [Authorize(Roles = "profesor,admin")]
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

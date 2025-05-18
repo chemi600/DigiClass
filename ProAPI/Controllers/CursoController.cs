@@ -35,8 +35,12 @@ namespace RestAPI.Controllers
         {
             try
             {
-
-                var entities = _mapper.Map<List<CursoDTO>>(await _cursoRepository.GetAllAsync());
+                var cursos = await _cursoRepository.GetAllAsync();
+                var entities = _mapper.Map<List<CursoDTO>>(cursos);
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    entities[i].NombreProfesor = cursos.ElementAt(i).Profesor.Name;
+                }
                 return Ok(entities);
             }
             catch (Exception ex)

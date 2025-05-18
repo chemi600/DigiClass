@@ -20,9 +20,15 @@ namespace InfoManager.ViewModel
         [ObservableProperty]
         private ObservableCollection<UsersModel> _items;
         [ObservableProperty]
-        private string _filtro;
+        private string _filtro = "";
+
+        [ObservableProperty]
+        private int _currentPage = 1;
+
+        private int _pageItems = 5;
 
         private readonly IProductProvider<UsersModel> _productService;
+        private List<UsersModel> _users;
 
         private readonly ProductViewModel _productView;
         private readonly IStringUtils _stringUtils;
@@ -39,25 +45,27 @@ namespace InfoManager.ViewModel
         {
             MainViewModel mainWindow = App.Current.Services.GetService<MainViewModel>();
 
-            List<UsersModel> _users = await _productService.GetAllUsers(mainWindow.GetToken());
+            _users = await _productService.GetAllUsers(mainWindow.GetToken());
             Items = new ObservableCollection<UsersModel>();
-            foreach (var planeta in _users)
+            UpdatePage(_users);
+        }
+
+        private void UpdatePage(IEnumerable<UsersModel> cursos)
+        {
+
+            var itemsPage = cursos.ToList().Skip((CurrentPage - 1) * _pageItems).Take(_pageItems);
+            Items.Clear();
+            foreach (var planeta in itemsPage)
             {
                 Items.Add(planeta);
             }
         }
 
-        
-
         [RelayCommand]
         private void Filter()
         {
-            IEnumerable<UsersModel> filter_items= Items.Where(e => e.name.Contains(Filtro));
-            Items.Clear();
-            foreach (UsersModel item in filter_items)
-            {
-                Items.Add(item);
-            }
+            IEnumerable<UsersModel> filter_items= _users.Where(e => e.name.Contains(Filtro));
+            UpdatePage(filter_items);
         }
 
         [RelayCommand]
@@ -77,6 +85,28 @@ namespace InfoManager.ViewModel
                     Items.Remove(user);
 
             }
+        }
+
+        [RelayCommand]
+        private void Next()
+        {
+            if (_users.ToList().Skip((CurrentPage) * _pageItems).Take(_pageItems).Count() != 0)
+            {
+                CurrentPage++;
+                UpdatePage(_users);
+            }
+
+        }
+
+        [RelayCommand]
+        private void Previous()
+        {
+            if (CurrentPage - 1 >= 1)
+            {
+                CurrentPage--;
+                UpdatePage(_users);
+            }
+
         }
 
     }

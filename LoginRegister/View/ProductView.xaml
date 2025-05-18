@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:InfoManager.View"
-        Background="White"
+        Background="#27548A"
              xmlns:viewmodels="clr-namespace:InfoManager.ViewModel"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:ProductViewModel}"
-        Height="350" Width="500">
+        Height="auto" Width="auto">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>

@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:InfoManager.View"
-        Background="White"
+        Background="#DDA853"
              xmlns:viewmodels="clr-namespace:InfoManager.ViewModel"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:DashboardViewModel}"
-        Height="400" Width="750">
+        Height="auto" Width="auto">
 
    
     <Grid>
@@ -57,7 +57,7 @@
 
             <!-- Encabezado -->
             <DockPanel Background="#34495E" Grid.Row="0" LastChildFill="False">
-                <TextBlock Text="Dashboard" FontSize="18" Foreground="White"
+                <TextBlock Text="DigiClass" FontSize="18" Foreground="White"
                            VerticalAlignment="Center" Margin="10,0" DockPanel.Dock="Left" />
 
                 <Button Content="Cerrar sesión"
@@ -68,6 +68,7 @@
                         FontWeight="Bold"
                         HorizontalAlignment="Right"
                         DockPanel.Dock="Right"
+                        Command="{Binding LogoutCommand}"
                          />
             </DockPanel>
 

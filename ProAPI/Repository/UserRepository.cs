@@ -53,9 +53,19 @@ namespace RestAPI.Repository
             return await Save();
         }
 
-        public ICollection<AppUser> GetUsers()
+        public async Task<ICollection<AppUser>> GetUsers()
         {
-            return _context.AppUsers.OrderBy(user => user.UserName).ToList();
+            var usersSinRol = _context.AppUsers.OrderBy(user => user.UserName).ToList();
+            var users = new List<AppUser>();
+            foreach (var item in usersSinRol)
+            {
+                var rol = await _userManager.GetRolesAsync(item);
+                if(rol.FirstOrDefault() != "admin")
+                {
+                    users.Add(item);
+                }
+            }
+            return users;
         }
 
         public async Task<ICollection<CursoEntity>> GetAllMyCourseAsync(string userId)
@@ -171,7 +181,7 @@ namespace RestAPI.Repository
             }
             if (!await _roleManager.RoleExistsAsync("profesor")|| !await _roleManager.RoleExistsAsync("estudiante"))
             {
-                //this will run only for first time the roles are created
+                //esto solo se ejecutara la primera vez que los roles sean creados
                 await _roleManager.CreateAsync(new IdentityRole("admin"));
                 await _roleManager.CreateAsync(new IdentityRole("estudiante"));
                 await _roleManager.CreateAsync(new IdentityRole("profesor"));

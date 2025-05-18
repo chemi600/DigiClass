@@ -22,6 +22,11 @@ namespace InfoManager.ViewModel
         [ObservableProperty]
         private string _filtro="";
 
+        [ObservableProperty]
+        private int _currentPage = 1;
+
+        private int _pageItems = 5;
+
         private readonly IProductProvider<CursoDTO> _productService;
 
         private ProductViewModel _selectedViewModel;
@@ -55,7 +60,16 @@ namespace InfoManager.ViewModel
 
             _products = await _productService.GetAll(mainWindow.GetToken());
             Items = new ObservableCollection<CursoDTO>();
-            foreach (var planeta in _products)
+            CurrentPage = 1;
+            UpdatePage(_products);
+        }
+
+        private void UpdatePage(IEnumerable<CursoDTO> cursos)
+        {
+
+            var itemsPage = cursos.ToList().Skip((CurrentPage - 1) * _pageItems).Take(_pageItems);
+            Items.Clear();
+            foreach (var planeta in itemsPage)
             {
                 Items.Add(planeta);
             }
@@ -73,12 +87,8 @@ namespace InfoManager.ViewModel
         [RelayCommand]
         private void Filter()
         {
-            IEnumerable<CursoDTO> filter_items= _products.Where(e => e.titulo.Contains(Filtro));
-            Items.Clear();
-            foreach (CursoDTO item in filter_items)
-            {
-                Items.Add(item);
-            }
+            IEnumerable<CursoDTO> filter_items = _products.Where(e => e.titulo.Contains(Filtro));
+            UpdatePage(filter_items);
         }
 
         [RelayCommand]
@@ -120,6 +130,29 @@ namespace InfoManager.ViewModel
             MostrarButtonRecarga = "Visible";
 
         }
+
+        [RelayCommand]
+        private void Next()
+        {
+            if (_products.ToList().Skip((CurrentPage) * _pageItems).Take(_pageItems).Count() != 0)
+            {
+                CurrentPage++;
+                UpdatePage(_products);
+            }
+
+        }
+
+        [RelayCommand]
+        private void Previous()
+        {
+            if (CurrentPage - 1 >= 1)
+            {
+                CurrentPage--;
+                UpdatePage(_products);
+            }
+
+        }
+
 
     }
 }

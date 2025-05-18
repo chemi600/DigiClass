@@ -9,9 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\DigiClassWhithe.png" />
     <None Remove="Resources\edificio.jpg" />
     <None Remove="Resources\IconComercio.png" />
     <None Remove="Resources\Instituto.jpg" />
+    <None Remove="Resources\logo_digi.png" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -25,6 +27,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Resource Include="Resources\DigiClassWhithe.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="Resources\edificio.jpg">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Resource>
@@ -34,9 +39,17 @@
 	  <Resource Include="Resources\Instituto.jpg">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Resource>
+	  <Resource Include="Resources\logo_digi.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Resource1.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resource1.resx</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Dashboard.xaml.cs">
 	    <SubType>Code</SubType>
 	  </Compile>
@@ -52,6 +65,14 @@
 	  <Compile Update="View\Register.xaml.cs">
 	    <SubType>Code</SubType>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resource1.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
