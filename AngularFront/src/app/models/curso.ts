@@ -9,7 +9,7 @@ export interface Curso {
     createdDate:Date,
     titulo:string,
     descripcion:string,
-    fechaInicio:Date,
-    fechaFin:Date,
+    fechaInicio:Date | string,
+    fechaFin:Date | string,
     nombreProfesor:string
 }

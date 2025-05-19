@@ -21,7 +21,7 @@
 </ng-container>
 <ng-template #inactivo>
   <div class="contenedor" id="miContenedor">
-    <div class="texto" (click)="toggleDesplegable()">{{name}}</div>
+    <div class="texto" (click)="toggleDesplegable()">{{name}} <i class="fa-solid fa-caret-down"></i></div>
     <div class="desplegable" *ngIf="mostrarDesplegable">
       <button class="logout" (click)="logout()">Cerrar Sesion</button>
     </div>

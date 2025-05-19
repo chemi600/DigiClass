@@ -1,64 +1,45 @@
-<article>
-    <div class="tab">
-        <button [class.active]="activeTab === 'tab1'" (click)="setTab('tab1')">Informacion</button>
-        <button [class.active]="activeTab === 'tab2'" *ngIf="role=='profesor'" (click)="setTab('tab2')">Participantes</button>
-    </div>
-
-<div *ngIf="activeTab === 'tab1'" class="tabcontent">
-
-<div class="curso-container">
-    <div class="campo">
-        <label for="titulo">Título:</label>
-        <div id="titulo">{{Curso.titulo}}</div>
-    </div>
-
-    <div class="campo">
-        <label for="descripcion">Descripción:</label>
-        <div id="descripcion">{{Curso.descripcion}}</div>
-    </div>
-
-    <div class="campo">
-        <label for="profesor">Nombre del Profesor:</label>
-        <div id="profesor">{{Curso.nombreProfesor}}</div>
-    </div>
-
-    <div class="campo">
-        <label for="fecha-inicio">Fecha de Inicio:</label>
-        <div id="fecha-inicio">{{fechaInicio}}</div>
-    </div>
-
-    <div class="campo">
-        <label for="fecha-fin">Fecha de Finalización:</label>
-        <div id="fecha-fin">{{fechaFin}}</div>
-    </div>
-
-    <ng-container *ngIf="role=='estudiante'">
-        <div>
-            <button class="boton-inscribirse" (click)="Inscribirse()">Inscribirse</button>
+ <div class="container">
+        <div class="course-section">
+            <h1>{{Curso.titulo}}</h1>
+            
+            <p>{{Curso.descripcion}}</p>
+            <div class="duration"><i class="fa-solid fa-calendar-days"></i> {{fechaInicio}} - {{fechaFin}}</div>
+            <ng-container *ngIf="role=='estudiante'">
+            <div class="button-section">
+                <button>Inscribirse</button>
+            </div>
+            </ng-container>
         </div>
-      </ng-container>
-</div>
-</div>
-
-<div *ngIf="activeTab === 'tab2'" class="tabcontent">
-    
-    <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of participantes">
-            <td>{{user.name}}</td>
-            <td>{{user.email}}</td>
-            <td>
-              <button (click)="deleteUser(user.name,user.id)">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-</div>
-</article>
+        <div class="instructor-section">
+            <img src="https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png?fit=500%2C500&ssl=1" alt="Instructor">
+            <h3>{{Curso.nombreProfesor}}</h3>
+            <p>Profesor</p>
+        </div>
+    </div>
+<ng-container *ngIf="role=='profesor'">
+  <div class="tabs-section">
+        <div class="tabs">
+            <div class="tab active">ESTUDIANTES</div>
+        </div>
+        <div class="tab-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                      <tr *ngFor="let user of participantes">
+                      <td>{{user.name}}</td>
+                      <td>{{user.email}}</td>
+                      <td>
+                        <button (click)="deleteUser(user.name,user.id)">Eliminar</button>
+                      </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</ng-container>

@@ -1,9 +1,11 @@
-<div class="card">
-    <a routerLink="/detalles/{{CursoModel.id}}">
-  <div class="card-title">{{CursoModel.titulo}}</div>
-  <div class="card-desc">{{CursoModel.descripcion}}</div>
-</a>
-<!--<div class="card-footer">
-    <button class="card-button">Añadir</button>
-</div>-->
-</div>
+    <div class="course-card">
+      <a routerLink="/detalles/{{CursoModel.id}}">
+      <div class="course-image python-bg"></div>
+      <h3>{{CursoModel.titulo}}</h3>
+      <p><span>{{CursoModel.fechaInicio}}</span> - <span>{{CursoModel.fechaFin}}</span></p>
+      <div class="rating">
+          <span class="tag">CURSO</span>
+                    
+        </div>
+      </a>
+    </div>

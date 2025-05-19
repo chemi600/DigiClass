@@ -1,30 +1,109 @@
-article {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 20px;
-  }
 
-  h1 {
-    text-align: center;
-    color: #333;
-  }
-
-  section {
-    margin-bottom: 40px;
-  }
-
-  h2 {
-    color: #444;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-  }
-
-  .card-list {
+.container {
     display: flex;
-    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 20px 10px;
     gap: 20px;
-  }
+    position: relative;
+}
 
-  
+
+/* Grid de cursos */
+.course-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+
+/* Media Queries para Responsive Design */
+
+/* Tablets (768px o menos) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        margin: 10px;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform: translateX(-100%);
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+        display: block;
+    }
+
+    .course-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .course-card {
+        padding-bottom: 10px;
+    }
+
+    .course-image {
+        height: 120px;
+    }
+
+    .course-card h3 {
+        font-size: 14px;
+    }
+
+    .course-card p {
+        font-size: 12px;
+    }
+
+    .rating {
+        font-size: 12px;
+    }
+
+    .tag {
+        font-size: 10px;
+    }
+}
+
+/* Móviles (480px o menos) */
+@media (max-width: 480px) {
+    .course-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .course-image {
+        height: 100px;
+    }
+
+    .course-card h3 {
+        font-size: 13px;
+    }
+
+    .course-card p {
+        font-size: 11px;
+    }
+
+    .rating {
+        font-size: 11px;
+    }
+
+    .tag {
+        font-size: 9px;
+    }
+
+    .trial-btn {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+}

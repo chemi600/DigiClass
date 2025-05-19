@@ -3,17 +3,19 @@ import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Curso } from 'src/app/models/curso';
 
+
+
 @Component({
   selector: 'app-card-curso',
   imports: [CommonModule,RouterModule],
   templateUrl: './card-curso.component.html',
-  styleUrls:['./card-curso.component.css']
+  styleUrls:['./card-curso.css']
 })
 export class CardCursoComponent {
-/*CursoModel:Curso;
+//CursoModel:Curso;
 
-constructor(curso:Curso){
-  this.CursoModel=curso
+/*constructor(curso:Curso){
+  
 }*/
 
 @Input() CursoModel!: Curso;

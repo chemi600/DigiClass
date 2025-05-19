@@ -65,7 +65,8 @@ export class AppComponent {
     localStorage.removeItem('name')
     localStorage.removeItem('role')
 
-    window.location.reload();
+    //window.location.reload();
+    this.router.navigate(['login'])
   }
 }
 

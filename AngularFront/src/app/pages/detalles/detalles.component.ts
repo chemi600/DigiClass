@@ -7,13 +7,14 @@ import dayjs from 'dayjs';
 import { User } from 'src/app/models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDeleteComponent } from 'src/app/component/confirm-delete/confirm-delete.component';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
   selector: 'app-detalles',
   imports: [CommonModule],
   templateUrl:'./detalles.component.html',
-  styleUrl:'./detalles.component.css'
+  styleUrl:'./detallescss.component.css'
 })
 export class DetallesComponent {
   Curso:Curso={id:0,createdDate:new Date(),descripcion:'',titulo:'',idProfesor:'',fechaFin:new Date(),fechaInicio:new Date(),nombreProfesor:''};
@@ -24,7 +25,7 @@ export class DetallesComponent {
   activeTab: string = 'tab1';
   participantes:User[]=[]
 
-  constructor(private cursoService: CursoService,private dialog: MatDialog) {
+  constructor(private cursoService: CursoService,private dialog: MatDialog, private auth: AppComponent) {
     this.role=localStorage.getItem('role');
     const cursoId = parseInt(this.route.snapshot.params['id']);
         cursoService.Curso(cursoId).then((cursos)=>{
@@ -35,10 +36,16 @@ export class DetallesComponent {
         if(this.role=='profesor')
           this.cursoService.Participantes(cursoId).then((estudiantes)=>{
             this.participantes=estudiantes
+        }).catch((err) => {
+          alert('Vuelve a iniciar sesion')
+          this.auth.logout()
         })
       }
       Inscribirse(){
-          this.cursoService.InscribirseCurso(this.Curso.id)
+          this.cursoService.InscribirseCurso(this.Curso.id).catch((err) => {
+          alert('Vuelve a iniciar sesion')
+          this.auth.logout()
+        })
       }
       setTab(tab: string) {
         this.activeTab = tab;
