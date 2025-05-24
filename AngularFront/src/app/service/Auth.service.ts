@@ -38,7 +38,7 @@ export class AuthService {
           }
           return response
         } else {
-          throw new Error('Token no valido')
+          throw new Error('Usuario o contraseña incorrecta')
         }
     
   }  

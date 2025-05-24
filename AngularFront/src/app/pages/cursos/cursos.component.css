@@ -7,6 +7,12 @@
     position: relative;
 }
 
+h2 {
+    color: #444;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+    margin: 20px;
+  }
 
 /* Grid de cursos */
 .course-grid {

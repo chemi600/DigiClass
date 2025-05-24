@@ -1,42 +1,43 @@
-import {Component,HostListener} from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { Router } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule, CommonModule],
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'DigiClass';
-  token=localStorage.getItem('token')
-  name=localStorage.getItem('name')
-  role=localStorage.getItem('role')
+  token: string | null = localStorage.getItem('token');
+  name: string | null = localStorage.getItem('name');
+  role: string | null = localStorage.getItem('role');
+  menuAbierto: boolean = false;
+  mostrarDesplegable: boolean = false;
 
-  mostrarDesplegable = false;
-
-
-  
   constructor(private router: Router) {
-    this.token=localStorage.getItem('token')
+    // No es necesario volver a asignar el token aquí, ya se inicializa en la declaración
   }
 
   toggleDesplegable() {
     this.mostrarDesplegable = !this.mostrarDesplegable;
   }
 
+  toggleMenu() {
+    this.menuAbierto = !this.menuAbierto;
+    // Cerrar el desplegable del usuario si el menú hamburguesa se cierra
+    if (!this.menuAbierto) {
+      this.mostrarDesplegable = false;
+    }
+  }
+
   goToRegister() {
-    
     this.router.navigate(['/login']);
   }
 
-  setToken(){
+   setToken(){
     this.token=localStorage.getItem('token')
   }
 
@@ -48,26 +49,25 @@ export class AppComponent {
     this.role=localStorage.getItem('role')
   }
 
+  logout() {
+    this.token = null;
+    this.name = null;
+    this.role = null;
+    localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('role');
+    this.mostrarDesplegable = false;
+    this.menuAbierto = false; // Cerrar el menú hamburguesa al cerrar sesión
+    this.router.navigate(['/login']);
+  }
+
   @HostListener('document:click', ['$event'])
   onClickFuera(event: MouseEvent) {
     const objetivo = event.target as HTMLElement;
-    if (!objetivo.closest('.contenedor')) {
+    if (!objetivo.closest('.contenedor') && !objetivo.closest('.menu-toggle')) {
       this.mostrarDesplegable = false;
+      // Opcional: cerrar el menú hamburguesa si se hace clic fuera
+      this.menuAbierto = false;
     }
   }
-
-  logout(){
-    this.token=''
-    this.role=''
-    this.name=''
-
-    localStorage.removeItem('token')
-    localStorage.removeItem('name')
-    localStorage.removeItem('role')
-
-    //window.location.reload();
-    this.router.navigate(['login'])
-  }
 }
-
-

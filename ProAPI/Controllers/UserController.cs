@@ -68,6 +68,24 @@ namespace RestAPI.Controllers
             }
         }
 
+        [HttpGet("Check/{id:int}")]
+        [Authorize(Roles = "profesor,estudiante")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Check(int id)
+        {
+            try
+            {
+                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var number = await _userRepository.Check(id,userId);
+                return Ok(number);
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError(ex, "Error fetching data");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpGet("Participantes/{id:int}")]
         [Authorize(Roles = "profesor,admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]

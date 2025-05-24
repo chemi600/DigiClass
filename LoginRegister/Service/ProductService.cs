@@ -110,7 +110,7 @@ namespace InfoManager.Service
             using HttpClient httpClient = new HttpClient();
             {
                 httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-                HttpResponseMessage datos = await httpClient.DeleteAsync(Constants.CURSOS + "/Participantes/"+cursoId+"&&" + userId);
+                HttpResponseMessage datos = await httpClient.DeleteAsync(Constants.CURSOS + "/Participantes/"+cursoId+"/" + userId);
                 string dataget = await datos.Content.ReadAsStringAsync();
                 //return JsonSerializer.Deserialize<T>(dataget);
                 if (datos.IsSuccessStatusCode)

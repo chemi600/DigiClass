@@ -13,7 +13,15 @@ import { CursoService } from 'src/app/service/curso.service';
 export class CrearCursoComponent {
 @Output() close = new EventEmitter<void>();
 curso:CreateCurso={titulo:'',descripcion:'',fechaFin:new Date(),fechaInicio:new Date()}
-  constructor(private cursoService: CursoService) {}
+  fechaMinima: Date = new Date()
+  fechaString: string
+  constructor(private cursoService: CursoService) {
+    const año = this.fechaMinima.getFullYear();
+    const mes = String(this.fechaMinima.getMonth() + 1).padStart(2, '0');
+    const dia = String(this.fechaMinima.getDate() + 1).padStart(2, '0');
+    
+    this.fechaString = `${año}-${mes}-${dia}`
+  }
 
   onClose() {
     this.close.emit();
@@ -25,6 +33,7 @@ curso:CreateCurso={titulo:'',descripcion:'',fechaFin:new Date(),fechaInicio:new 
     
     if(await this.cursoService.CrearCurso(this.curso)){
       alert('Curso creado exitosamente')
+      window.location.reload()
     }
     
     }catch(error:any){

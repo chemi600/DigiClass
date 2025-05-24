@@ -4,9 +4,14 @@
             
             <p>{{Curso.descripcion}}</p>
             <div class="duration"><i class="fa-solid fa-calendar-days"></i> {{fechaInicio}} - {{fechaFin}}</div>
-            <ng-container *ngIf="role=='estudiante'">
+            <ng-container *ngIf="status==1">
             <div class="button-section">
-                <button>Inscribirse</button>
+                <button (click)="Inscribirse()">Inscribirse</button>
+            </div>
+            </ng-container>
+            <ng-container *ngIf="status==2">
+            <div class="button-section">
+                <button class="borrar" (click)="Borrar()">Borrar</button>
             </div>
             </ng-container>
         </div>
@@ -16,7 +21,7 @@
             <p>Profesor</p>
         </div>
     </div>
-<ng-container *ngIf="role=='profesor'">
+<ng-container *ngIf="role=='profesor' && status==2">
   <div class="tabs-section">
         <div class="tabs">
             <div class="tab active">ESTUDIANTES</div>

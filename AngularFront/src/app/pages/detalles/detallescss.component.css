@@ -55,6 +55,20 @@
         .button-section button:hover {
             background-color: #5a347f;
         }
+        .button-section .borrar {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .button-section .borrar:hover {
+            background-color: red;
+        }
+
         
         .instructor-section {
             flex: 1;

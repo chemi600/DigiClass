@@ -5,6 +5,8 @@ import { CardCursoComponent } from 'src/app/component/card-curso/card-curso.comp
 import { CrearCursoComponent } from 'src/app/component/crear-curso/crear-curso.component';
 import { Curso } from 'src/app/models/curso';
 import { CursoService } from 'src/app/service/curso.service';
+import dayjs from 'dayjs';
+
 
 @Component({
   selector: 'app-mis-cursos',
@@ -16,10 +18,25 @@ export class MisCursosComponent {
   showModal = false;
   role=localStorage.getItem('role')
   cursosActuales:Curso[]=[]
+  cursosTerminados:Curso[]=[]
+
 
   constructor(private cursoService: CursoService, private auth: AppComponent){
     this.role=localStorage.getItem('role')
-    cursoService.MisCursos().then((cursos)=>this.cursosActuales=cursos).catch((err) => {
+    cursoService.MisCursos().then((cursos)=>{
+      let fecha = new Date()
+      cursos.forEach((item => {
+        if(new Date(item.fechaFin) < fecha){
+          item.fechaInicio = dayjs(item.fechaInicio).format('DD MMM')
+          item.fechaFin = dayjs(item.fechaFin).format('DD MMM')
+          this.cursosTerminados.push(item)
+        } else {
+          item.fechaInicio = dayjs(item.fechaInicio).format('DD MMM')
+          item.fechaFin = dayjs(item.fechaFin).format('DD MMM')
+          this.cursosActuales.push(item)
+        }
+    }))
+      }).catch((err) => {
           alert('Vuelve a iniciar sesion')
           auth.logout()
         })

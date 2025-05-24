@@ -1,7 +1,7 @@
 
 
 <article>
-    <h1>Artículos por Categoría</h1>
+   
     <ng-container *ngIf="role=='profesor'">
       <button (click)="openModal()" class="fixed-action-button">+</button>
       <app-crear-curso *ngIf="showModal" (close)="closeModal()"></app-crear-curso>
@@ -17,6 +17,7 @@
   <section>
     <h2>Terminados</h2>
     <div class="card-list">
+      <app-card-curso *ngFor="let CursoModel of cursosTerminados" [CursoModel]="CursoModel"></app-card-curso>
     </div>
   </section>
 </article>

@@ -146,7 +146,7 @@ namespace RestAPI.Controllers
         }
 
 
-        [Authorize(Roles = "profesor,estudiante")]
+        [Authorize(Roles = "profesor,admin")]
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -158,7 +158,7 @@ namespace RestAPI.Controllers
                 if (entity == null) return NotFound();
 
                 await _cursoRepository.DeleteAsync(id);
-                return Ok();
+                return Ok(true);
             }
             catch (Exception ex)
             {
@@ -167,15 +167,17 @@ namespace RestAPI.Controllers
             }
         }
 
-        [Authorize(Roles = "profesor")]
-        [HttpDelete("Participantes/{id:int}&&{userId:guid}")]
+        [Authorize(Roles = "profesor,admin,estudiante")]
+        [HttpDelete("Participantes/{id:int}/{userId:guid?}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteParticipante(int id, string userId)
+        public async Task<IActionResult> DeleteParticipante(int id, string? userId)
         {
             try
             {
-                
+                if(User.IsInRole("estudiante")){
+                    userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                }
                 var entity = await _cursoRepository.GetAsync(id);
                 if (entity == null) return NotFound();
 

@@ -3,31 +3,34 @@
 <header>
   <div class="logo">
     <img src="../assets/logo_digi.png" alt="Logo DigiClass" />
-    
   </div>
   <nav>
-    <a href="#">Inicio</a>
-    <a  routerLink="/cursos">Cursos</a>
-  <ng-container *ngIf="token">
-    <a href="#" routerLink="/misCursos">Mis Cursos</a>
-</ng-container>
-    <a href="#">Sobre Nosotros</a>
-    <a href="#">Contacto</a>
+    <div class="menu-toggle" (click)="toggleMenu()">☰</div>
+    <ul class="nav-links" [ngClass]="{'active': menuAbierto}">
+      <li><a href="#" routerLink="/" (click)="toggleMenu()">Inicio</a></li>
+      <li><a routerLink="/cursos" (click)="toggleMenu()">Cursos</a></li>
+      <ng-container *ngIf="token">
+        <li><a href="#" routerLink="/misCursos" (click)="toggleMenu()">Mis Cursos</a></li>
+      </ng-container>
+      <li><a href="#" routerLink="/sobre-nosotros" (click)="toggleMenu()">Sobre Nosotros</a></li>
+      <li><a href="#" routerLink="/contacto" (click)="toggleMenu()">Contacto</a></li>
+      <ng-container *ngIf="!token; else inactivo">
+        <li>
+          <button (click)="goToRegister()" class="btn_login">Iniciar sesión</button>
+        </li>
+      </ng-container>
+      <ng-template #inactivo>
+        <li class="contenedor" id="miContenedor">
+          <div class="texto" (click)="toggleDesplegable()">
+            {{name}} <i class="fa-solid fa-caret-down"></i>
+          </div>
+          <div class="desplegable" *ngIf="mostrarDesplegable">
+            <button class="logout" (click)="logout()">Cerrar Sesión</button>
+          </div>
+        </li>
+      </ng-template>
+    </ul>
   </nav>
-  <ng-container *ngIf="!token; else inactivo">
-  <div>
-    <button (click)="goToRegister()" class="btn_login">Iniciar sesion</button>
-  </div>
-</ng-container>
-<ng-template #inactivo>
-  <div class="contenedor" id="miContenedor">
-    <div class="texto" (click)="toggleDesplegable()">{{name}} <i class="fa-solid fa-caret-down"></i></div>
-    <div class="desplegable" *ngIf="mostrarDesplegable">
-      <button class="logout" (click)="logout()">Cerrar Sesion</button>
-    </div>
-  </div>
-</ng-template>
-  
 </header>
 
 <router-outlet></router-outlet>

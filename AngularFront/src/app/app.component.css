@@ -1,70 +1,101 @@
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
-    --fondo-claro: #F5EEDC;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  --fondo-claro: #F5EEDC;
   --azul-principal: #27548A;
   --azul-oscuro: #183B4E;
   --amarillo: #DDA853;
-  }
+}
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--fondo-claro);
-    color: #1f2937;
-  }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--fondo-claro);
+  color: #1f2937;
+}
 
-  header {
-    background-color: #183B4E; /* Azul marino */
-    padding: 10px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+header {
+  background-color: var(--azul-oscuro);
+  padding: 10px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1000; /* Alto z-index para el header */
+}
 
-  .logo {
-    display: flex;
-    align-items: center;
-  }
+.logo {
+  display: flex;
+  align-items: center;
+}
 
-  .logo img {
-    height: 100px;
-    margin-right: 12px;
-    width: 200px;
-    object-fit: cover;
-  }
+.logo img {
+  height: 100px;
+  margin-right: 12px;
+  width: 200px;
+  object-fit: cover;
+}
 
-  .logo h1 {
-    color: #ffffff;
-    font-size: 1.5rem;
-  }
+.logo h1 {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
 
-  nav a {
-    color: #ffffff;
-    margin-left: 20px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s;
-  }
+nav {
+  display: flex;
+  align-items: center;
+}
 
-  nav a:hover {
-    color: #38bdf8;
-  }
+.nav-links {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
 
-  
-  .btn_login{
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif;
-  }
+.nav-links li {
+  margin-left: 20px;
+}
 
-/*desplegable*/
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #38bdf8;
+}
+
+.btn_login {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: var(--amarillo);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.btn_login:hover {
+  background-color: #c4963e;
+}
+
+/* Menú hamburguesa */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Desplegable del usuario */
 .contenedor {
   position: relative;
-  display: inline-block;
   font-family: Arial, sans-serif;
 }
 
@@ -76,20 +107,25 @@
   cursor: pointer;
   user-select: none;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .desplegable {
   position: absolute;
-  top: 120%;
+  top: 100%; /* Ajustado para que aparezca justo debajo */
   left: 0;
   background-color: white;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   min-width: 100px;
   overflow: hidden;
-  z-index: 1;
+  z-index: 1001;
 }
-.desplegable>.logout{
+
+/* Botón de cerrar sesión */
+.desplegable>.logout {
   background-color: red;
   color: white;
 }
@@ -105,9 +141,82 @@
 }
 
 .desplegable button:hover {
-  color:#38bdf8;
+  color: #38bdf8;
 }
 
+
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* Mostrar ícono de hamburguesa */
+  }
+
+  .nav-links {
+    display: none; /* Ocultar menú por defecto */
+    flex-direction: column;
+    position: absolute; /* Cambiado de fixed a absolute */
+    top: 100%; /* Justo debajo del header */
+    left: 0;
+    right: 0;
+    background-color: var(--azul-oscuro);
+    padding: 10px 20px; /* Reducido el padding para hacerlo más compacto */
+    z-index: 999; /* Alto z-index para estar por encima del contenido */
+    max-height: 70vh; /* Limita la altura máxima del menú */
+    overflow-y: auto; /* Permite desplazamiento si el menú es largo */
+  }
+
+  .nav-links.active {
+    display: flex; /* Mostrar menú cuando está activo */
+  }
+
+  .nav-links li {
+    margin: 8px 0; /* Reducido el margen para hacerlo más compacto */
+  }
+
+  .nav-links a,
+  .btn_login {
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: left;
+    padding: 5px 0; /* Añadido padding para mejor clic */
+  }
+
+  .btn_login {
+    padding: 10px;
+    background-color: var(--amarillo);
+  }
+
+  .contenedor {
+    width: 100%;
+  }
+
+  .texto {
+    width: 100%;
+    text-align: left;
+  }
+
+  .desplegable {
+    position: static;
+    width: 100%;
+    background-color: #f0f0f0;
+    z-index: 1001;
+  }
   
+}
 
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  header {
+    padding: 10px 20px;
+  }
 
+  .logo img {
+    height: 80px;
+    width: 160px;
+  }
+
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+}

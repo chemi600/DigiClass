@@ -38,6 +38,39 @@ namespace RestAPI.Repository
             return result;
         }
 
+        public async Task<int> Check(int cursoId, string userId)
+        {
+            AppUser user = _context.AppUsers.FirstOrDefault((u) => u.Id == userId);
+            var role = await _userManager.GetRolesAsync(user);
+            CursoEntity curso = _context.Cursos.Include((c)=> c.Participantes).FirstOrDefault((c)=>c.Id == cursoId);
+
+            if (role.FirstOrDefault() == "profesor")
+            {
+                if (curso.IdProfesor == user.Id) 
+                {
+                    return 2;
+                }
+                else
+                {
+                    return 0;
+                }
+                
+            } else if(role.FirstOrDefault() == "estudiante")
+            {
+                if (curso.Participantes.Any((p) => p.Id == userId))
+                {
+                    return 2;
+                }
+                else
+                {
+                    return 1;
+                }
+                    
+            }
+
+            return 0;
+        }
+
         public AppUser GetUser(string id)
         {
             return _context.AppUsers.FirstOrDefault(user => user.Id == id);

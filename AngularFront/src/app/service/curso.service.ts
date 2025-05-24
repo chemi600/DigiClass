@@ -14,6 +14,7 @@ export class CursoService {
   private misCursos=`http://localhost:5072/api/users/MisCursos`
   private participantes=`http://localhost:5072/api/users/Participantes`
   private Cursoparticipantes=`http://localhost:5072/api/Curso/Participantes`
+  private CursoCheck=`http://localhost:5072/api/users/Check`
 
 
   private inscribirse=`http://localhost:5072/api/users/Apuntarse`
@@ -114,7 +115,7 @@ export class CursoService {
           async DeleteEstudent(cursoId: number,userId:string): Promise<boolean> {
             this.token = localStorage.getItem('token');
     
-              const response=await fetch(this.Cursoparticipantes+`/${cursoId}&&${userId}`, {
+              const response=await fetch(this.Cursoparticipantes+`/${cursoId}/${userId}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${this.token}` }
               }).catch(error => {
@@ -129,6 +130,20 @@ export class CursoService {
                 
               }
 
+          async Check(cursoId: number,userId:string): Promise<number> {
+            this.token = localStorage.getItem('token');
+    
+              const response=await fetch(this.CursoCheck+`/${cursoId}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${this.token}` }
+              }).catch(error => {
+                throw new Error(error)
+              }).then((data)=>data.json())
+          
+               return response
+                          
+              }
+
           async Participantes(id:number): Promise<[User]> {
             this.token = localStorage.getItem('token');
                 const response=await fetch(this.participantes+`/${id}`, {
@@ -140,6 +155,21 @@ export class CursoService {
                 });
                   return response;
                 }
+          async BorrarCurso(id:number): Promise<boolean>{
+            this.token = localStorage.getItem('token');
+
+            const response = await fetch(this.pathCurso+`/${id}`,{
+                  method: 'DELETE',
+                  headers: { 'Authorization': `Bearer ${this.token}`},
+            }).then((data) => data.json())
+            .catch((error) => {throw new Error(error)})
+
+            if (!response) {
+                throw new Error('Algo salio mal')
+              }else{
+                return true
+              }
+          }
     
     
 }
