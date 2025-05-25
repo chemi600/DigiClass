@@ -1,0 +1,9 @@
+﻿<Application x:Class="DigiClass.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:model="clr-namespace:DigiClass.ViewModel"
+             xmlns:local="clr-namespace:DigiClass">
+    <Application.Resources>
+        <model:BoolToVisibilityConverter x:Key="BoolToVis"/>
+    </Application.Resources>
+</Application>
