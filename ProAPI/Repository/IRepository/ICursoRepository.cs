@@ -6,6 +6,7 @@ namespace RestAPI.Repository.IRepository
     {
         Task<ICollection<CursoEntity>> GetAllUnsubscribeAsync(string userId);
         Task<bool> DeleteParticipanteAsync(int cursoid, string userId);
+        Task<ICollection<CursoEntity>> GetAllTimes();
 
     }
 }

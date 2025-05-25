@@ -35,10 +35,21 @@ namespace RestAPI.Repository
 
         public async Task<ICollection<CursoEntity>> GetAllAsync()
         {
-            if (_cache.TryGetValue(CursoEntityCacheKey, out ICollection<CursoEntity> CursosCached))
-                return CursosCached;
+            
 
             var CursosFromDb = await _context.Cursos.Include(p=>p.Profesor).Where(c => c.FechaInicio>=DateTime.Now).OrderBy(c => c.FechaInicio).ToListAsync();
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                  .SetAbsoluteExpiration(TimeSpan.FromSeconds(CacheExpirationTime));
+
+            _cache.Set(CursoEntityCacheKey, CursosFromDb, cacheEntryOptions);
+            return CursosFromDb;
+        }
+
+        public async Task<ICollection<CursoEntity>> GetAllTimes()
+        {
+           
+
+            var CursosFromDb = await _context.Cursos.Include(p => p.Profesor).OrderBy(c => c.FechaInicio).ToListAsync();
             var cacheEntryOptions = new MemoryCacheEntryOptions()
                   .SetAbsoluteExpiration(TimeSpan.FromSeconds(CacheExpirationTime));
 

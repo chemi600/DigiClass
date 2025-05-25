@@ -18,10 +18,10 @@ namespace InfoManager.ViewModel
         private readonly ILoginProvider<UserDTO> _loginService;
 
         [ObservableProperty]
-        private string _name="ra@gmail.com";
+        private string _name="";
 
         [ObservableProperty]
-        private string _password="Abc123??";
+        private string _password="";
 
         public HomeViewModel(ILoginProvider<UserDTO> registro)
         {

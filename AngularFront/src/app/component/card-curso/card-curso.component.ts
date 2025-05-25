@@ -12,11 +12,6 @@ import { Curso } from 'src/app/models/curso';
   styleUrls:['./card-curso.css']
 })
 export class CardCursoComponent {
-//CursoModel:Curso;
-
-/*constructor(curso:Curso){
-  
-}*/
 
 @Input() CursoModel!: Curso;
 }

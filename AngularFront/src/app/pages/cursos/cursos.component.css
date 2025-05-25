@@ -14,7 +14,6 @@ h2 {
     margin: 20px;
   }
 
-/* Grid de cursos */
 .course-grid {
     flex: 1;
     display: grid;
@@ -23,9 +22,7 @@ h2 {
 }
 
 
-/* Media Queries para Responsive Design */
 
-/* Tablets (768px o menos) */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -81,7 +78,6 @@ h2 {
     }
 }
 
-/* Móviles (480px o menos) */
 @media (max-width: 480px) {
     .course-grid {
         grid-template-columns: 1fr;

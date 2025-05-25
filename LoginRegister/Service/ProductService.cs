@@ -21,7 +21,7 @@ namespace InfoManager.Service
             using HttpClient httpClient = new HttpClient();
             {
                 httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-                HttpResponseMessage datos = await httpClient.GetAsync(Constants.CURSOS);
+                HttpResponseMessage datos = await httpClient.GetAsync(Constants.CURSOS+"/Todos");
                 string dataget = await datos.Content.ReadAsStringAsync();
                 return JsonSerializer.Deserialize<List<T>>(dataget);
             }

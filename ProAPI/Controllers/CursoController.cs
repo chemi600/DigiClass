@@ -50,6 +50,29 @@ namespace RestAPI.Controllers
             }
         }
 
+        [HttpGet("Todos")]
+        //[Authorize(Roles = "profesor,estudiante")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllTimes()
+        {
+            try
+            {
+                var cursos = await _cursoRepository.GetAllTimes();
+                var entities = _mapper.Map<List<CursoDTO>>(cursos);
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    entities[i].NombreProfesor = cursos.ElementAt(i).Profesor.Name;
+                }
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError(ex, "Error fetching data");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
 
         [HttpGet("Nuevos")]
         [Authorize(Roles = "profesor,estudiante")]

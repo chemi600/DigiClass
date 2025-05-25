@@ -11,22 +11,6 @@
     z-index: 1000;
   }
   
-  /*.modal-box {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    max-width: 90%;
-  }
-  
-  .modal-actions {
-    text-align: right;
-    margin-top: 15px;
-  }
-  
-  button {
-    margin-left: 10px;
-  }*/
   .modal-content {
     background-color: #fff;
     margin: 10% auto;
