@@ -12,8 +12,7 @@
       <ng-container *ngIf="token">
         <li><a href="#" routerLink="/misCursos" (click)="toggleMenu()">Mis Cursos</a></li>
       </ng-container>
-      <li><a href="#" routerLink="/sobre-nosotros" (click)="toggleMenu()">Sobre Nosotros</a></li>
-      <li><a href="#" routerLink="/contacto" (click)="toggleMenu()">Contacto</a></li>
+      <li><a href="#" routerLink="/about" (click)="toggleMenu()">Sobre Nosotros</a></li>
       <ng-container *ngIf="!token; else inactivo">
         <li>
           <button (click)="goToRegister()" class="btn_login">Iniciar sesión</button>

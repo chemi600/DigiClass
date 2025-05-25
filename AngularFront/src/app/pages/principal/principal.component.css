@@ -1,42 +1,181 @@
 .hero {
-  padding: 80px 40px;
-  text-align: center;
-  background: linear-gradient(to right, #27548A, #1e293b);
-  color: white;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2018/11/cursos-online.jpg?tf=3840x');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
 }
 
-.hero h2 {
-  font-size: 3rem;
-  margin-bottom: 20px;
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
 }
 
-.hero p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 30px;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 12px 24px;
-  background-color: #38bdf8;
-  color: white;
-  border-radius: 8px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background-color 0.3s;
+.cta-btn {
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
 }
 
-.btn:hover {
-  background-color: #0ea5e9;
+.cta-btn:hover {
+    background-color: #0056b3;
 }
 
+.courses {
+    padding: 80px 50px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.courses h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.course-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+}
+
+.course-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.course-card h3 {
+    padding: 20px;
+    font-size: 24px;
+}
+
+.course-card p {
+    padding: 0 20px 20px;
+    color: #666;
+}
+
+.course-btn {
+    display: block;
+    margin: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.course-btn:hover {
+    background-color: #0056b3;
+}
+
+.testimonials {
+    padding: 80px 50px;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.testimonial {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial p {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.testimonial h4 {
+    color: #007bff;
+}
+
+.cta {
+    padding: 80px 50px;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.cta h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.cta p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+/* Footer */
 footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9rem;
-  color: #6b7280;
+    padding: 20px;
+    text-align: center;
+    background-color: #183B4E;
+    color: #fff;
 }
 
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 32px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+}

@@ -72,7 +72,7 @@ nav {
   padding: 12px 24px;
   border-radius: 8px;
   font-family: 'Be Vietnam Pro', sans-serif;
-  background-color: var(--amarillo);
+  background-color: #007bff;
   color: #ffffff;
   border: none;
   cursor: pointer;
@@ -81,7 +81,7 @@ nav {
 }
 
 .btn_login:hover {
-  background-color: #c4963e;
+  background-color: #0056b3;
 }
 
 /* Menú hamburguesa */
