@@ -1,10 +1,7 @@
 import { Routes } from '@angular/router';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { PrincipalComponent } from './pages/principal/prinicpal.component';
-import { PropuestaPageComponent } from './pages/propuesta-page/propuesta-page.component';
-import { AnadirComponent } from './pages/anadir/anadir.component';
 import { MisCursosComponent } from './pages/mis-cursos/mis-cursos.component';
 import { CursosComponent } from './pages/cursos/cursos.component';
 import { DetallesComponent } from './pages/detalles/detalles.component';
