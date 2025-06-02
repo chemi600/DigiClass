@@ -49,10 +49,10 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding id}" />
                     <DataGridTextColumn Header="Titulo" Binding="{Binding titulo}" />
-                    <DataGridTextColumn Header="Descripcion" Binding="{Binding descripcion}"/>
+                    <DataGridTextColumn Header="Descripcion" Binding="{Binding descripcion}" Width="100"/>
                     <DataGridTextColumn Header="Profesor" Binding="{Binding nombreProfesor}"/>
-                    <DataGridTextColumn Header="Fecha de Inicio" Binding="{Binding fechaInicio}"/>
-                    <DataGridTextColumn Header="Fecha de fin" Binding="{Binding fechaFin}"/>
+                    <DataGridTextColumn Header="Fecha de Inicio" Binding="{Binding fechaInicio, StringFormat=dd/MM/yyyy}"/>
+                    <DataGridTextColumn Header="Fecha de fin" Binding="{Binding fechaFin, StringFormat=dd/MM/yyyy}"/>
                     
                     <DataGridTemplateColumn Header="Ver">
                         <DataGridTemplateColumn.CellTemplate>
